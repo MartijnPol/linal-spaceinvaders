@@ -40,6 +40,10 @@ int main(int argc, char * argv[])
 	auto scale_factor = 0.0f;
 	auto reversed = false;
 
+	auto translate_x_factor = 0.0f;
+	auto translate_y_factor = 0.0f;
+	auto speed = 0.1f;
+
 	SDL_Event event;
 	while (is_running)
 	{
@@ -49,8 +53,9 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			graphics.draw_coordinate_system();
 
-			auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
-			graphics.draw_matrix(rotated_rocket, GraphicsFacade::preset_color::blue);
+			//auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
+			auto translated_rocket = translate(rocket, translate_x_factor, translate_y_factor);
+			graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
 
 			auto scaled_target = scale(target, scale_factor, scale_factor);
 			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);
@@ -59,6 +64,39 @@ int main(int argc, char * argv[])
 			if (event.type == SDL_QUIT)
 			{
 				is_running = false;
+			}
+			else if (event.type == SDL_KEYDOWN)
+			{
+				const auto key = event.key.keysym.sym;
+				switch (key)
+				{
+				case SDLK_LEFT:
+					translate_x_factor -= speed;
+					break;
+
+				case SDLK_RIGHT:
+					translate_x_factor += speed;
+					break;
+
+				case SDLK_UP:
+					translate_y_factor += speed;
+					break;
+
+				case SDLK_DOWN:
+					translate_y_factor -= speed;
+					break;
+
+				case SDLK_LSHIFT:
+					speed += 0.01f;
+					break;
+
+				case SDLK_RSHIFT:
+					speed -= 0.01f;
+					break;
+
+				default:
+					break;
+				}
 			}
 
 			if (scale_factor <= max_scale_factor && !reversed)
