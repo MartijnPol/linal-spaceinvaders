@@ -28,8 +28,9 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto rocket = Matrix<float>(3, 4, { 0, 0, 5, 5,
+	auto rocket = Matrix<float>(4, 4, { 0, 0, 5, 5,
 										0, 5, 5, 0,
+										1, 1, 1, 1,
 										1, 1, 1, 1 });
 
 	auto target = Matrix<float>(3, 4, { 0, 0, 5, 5,
@@ -53,7 +54,7 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			graphics.draw_coordinate_system();
 
-			//auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
+			auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
 			auto translated_rocket = translate(rocket, translate_x_factor, translate_y_factor);
 			graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
 
@@ -61,6 +62,7 @@ int main(int argc, char * argv[])
 			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);
 
 			SDL_PollEvent(&event);
+			 
 			if (event.type == SDL_QUIT)
 			{
 				is_running = false;

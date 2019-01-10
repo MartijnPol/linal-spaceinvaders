@@ -240,16 +240,12 @@ namespace math
 	Matrix<T> rotate_z(Matrix<T> &matrix, T degrees, T x, T y, T z)
 	{
 		const auto radian = Math::degrees_to_radius(degrees);
-		translate(matrix, -x, -y, -z);
 		auto rotation_matrix = Matrix<T>(4, 4, { cos(radian), -sin(radian), 0, 0,
 												 sin(radian), cos(radian), 0, 0,
 												 0, 0, 1, 0,
 												 0, 0, 0, 1 });
 
-		matrix = rotation_matrix * matrix;
-		translate(matrix, x, y, z);
-
-		return matrix;
+		return rotation_matrix * matrix;
 	}
 
 	template<class T>
