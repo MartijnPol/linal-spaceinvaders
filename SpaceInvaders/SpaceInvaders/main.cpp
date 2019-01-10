@@ -33,10 +33,10 @@ int main(int argc, char * argv[])
 									   1, 1, 1, 1 });
 
 	graphics.clear();
-	graphics.draw_coordinate_system();
-	graphics.draw_matrix(shape_matrix, GraphicsFacade::preset_color::red);
+	//graphics.draw_coordinate_system();
+	graphics.draw_matrix(shape_matrix, GraphicsFacade::preset_color::white);
 	auto scale_matrix = scale(shape_matrix, 2.0f, 2.0f);
-	graphics.draw_matrix(scale_matrix, GraphicsFacade::preset_color::blue);
+	graphics.draw_matrix(scale_matrix, GraphicsFacade::preset_color::white);
 
 	const auto degrees = 1.0f;
 
@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 			graphics.draw_coordinate_system();
 
 			auto rotated_matrix = rotate(shape_matrix, degrees, 2.0f, 2.0f);
-			graphics.draw_matrix(rotated_matrix, GraphicsFacade::preset_color::red);
+			graphics.draw_matrix(rotated_matrix, GraphicsFacade::preset_color::blue);
 			
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT)

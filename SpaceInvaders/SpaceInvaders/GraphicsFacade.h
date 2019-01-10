@@ -26,7 +26,7 @@ namespace graphics
 		GraphicsFacade(int width, int height, int spacing);
 		~GraphicsFacade();
 
-		enum class preset_color { red, green, blue };
+		enum class preset_color { red, green, blue, white };
 
 		bool init();
 		void draw_coordinate_system() const;
@@ -62,20 +62,18 @@ namespace graphics
 					end.y = matrix.at(1, i + 1);
 				}
 
-				start = Point(_width / 2.0f, _height / 2.0f).add(start);
-				end = Point(_width / 2.0f, _height / 2.0f).add(end);
+				start = Point(width_ / 2.0f, height_ / 2.0f).add(start);
+				end = Point(width_ / 2.0f, height_ / 2.0f).add(end);
 
 				draw_line(start, end, preset_color);
 			}
 		}
 
 	private:
-		int _width, _height, _spacing;
-		SDL_Window *_main_window;
-		SDL_Renderer *_renderer;
-		Color _preset_colors[3] = { Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255) };
-
-
+		int width_, height_, spacing_;
+		SDL_Window *main_window_;
+		SDL_Renderer *renderer_;
+		Color preset_colors_[4] = { Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(255,255,255) };
 		void draw_text(std::string &message, Point &location) const;
 	};
 }
