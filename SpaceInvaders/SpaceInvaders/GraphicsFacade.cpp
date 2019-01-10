@@ -8,6 +8,8 @@ namespace graphics
 		this->width_ = width;
 		this->height_ = height;
 		this->spacing_ = spacing;
+
+		init();
 	}
 
 	GraphicsFacade::~GraphicsFacade() = default;

@@ -23,22 +23,14 @@ int main(int argc, char * argv[])
 	const auto spacing = 25;
 	const auto width = 30;
 	const auto height = 20;
+	const auto degrees = 1.0f;
 
-	auto timer = TimerFacade();
-	auto graphics = GraphicsFacade(width, height, spacing);
-	graphics.init();
+	auto timer = TimerFacade{};
+	auto graphics = GraphicsFacade{ width,height,spacing };
 
 	auto shape_matrix = Matrix<float>(3, 4, { 0, 0, 5, 5,
-									   0, 5, 5, 0,
-									   1, 1, 1, 1 });
-
-	graphics.clear();
-	//graphics.draw_coordinate_system();
-	graphics.draw_matrix(shape_matrix, GraphicsFacade::preset_color::white);
-	auto scale_matrix = scale(shape_matrix, 2.0f, 2.0f);
-	graphics.draw_matrix(scale_matrix, GraphicsFacade::preset_color::white);
-
-	const auto degrees = 1.0f;
+											  0, 5, 5, 0,
+											  1, 1, 1, 1 });
 
 	SDL_Event event;
 	while (is_running)
@@ -51,7 +43,7 @@ int main(int argc, char * argv[])
 
 			auto rotated_matrix = rotate(shape_matrix, degrees, 2.0f, 2.0f);
 			graphics.draw_matrix(rotated_matrix, GraphicsFacade::preset_color::blue);
-			
+
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT)
 			{

@@ -12,7 +12,7 @@ namespace utils
 	class ShapeFactory
 	{
 	public:
-		enum shape { triangle, rectangle };
+		enum shape { triangle, rectangle, rocket };
 
 		ShapeFactory() = default;
 		~ShapeFactory() = default;
@@ -35,6 +35,11 @@ namespace utils
 				vectors.push_back(std::make_unique<Vector2D>(Point(2.5f, 2), 0, -1));
 				vectors.push_back(std::make_unique<Vector2D>(Point(2.5f, 1), -1.5f, 0));
 				break;
+
+			case rocket:
+				vectors.push_back(std::make_unique<Vector2D>(origin, -6, 0));
+				vectors.push_back(std::make_unique<Vector2D>(origin, -2, 6));
+				vectors.push_back(std::make_unique<Vector2D>(Point{ origin.x - 6, origin.y }, 2, 6));
 
 			default:;
 			}

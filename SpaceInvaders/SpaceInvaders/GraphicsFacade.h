@@ -23,18 +23,15 @@ namespace graphics
 	class GraphicsFacade
 	{
 	public:
-		GraphicsFacade(int width, int height, int spacing);
-		~GraphicsFacade();
 
 		enum class preset_color { red, green, blue, white };
 
-		bool init();
+		GraphicsFacade(int width, int height, int spacing);
+		~GraphicsFacade();
+
 		void draw_coordinate_system() const;
-
 		void draw_vector(Vector2D vector, preset_color preset_color) const;
-
 		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, preset_color preset_color) const;
-
 		void draw_rectangle(SDL_Rect &rectangle, preset_color preset_color) const;
 		void draw_line(Point &start, Point &end, preset_color preset_color) const;
 		void clear() const;
@@ -74,6 +71,8 @@ namespace graphics
 		SDL_Window *main_window_;
 		SDL_Renderer *renderer_;
 		Color preset_colors_[4] = { Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(255,255,255) };
+		
+		bool init();
 		void draw_text(std::string &message, Point &location) const;
 	};
 }
