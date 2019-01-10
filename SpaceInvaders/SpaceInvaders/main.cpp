@@ -70,19 +70,19 @@ int main(int argc, char * argv[])
 				const auto key = event.key.keysym.sym;
 				switch (key)
 				{
-				case SDLK_LEFT:
+				case SDLK_a:
 					translate_x_factor -= speed;
 					break;
 
-				case SDLK_RIGHT:
+				case SDLK_d:
 					translate_x_factor += speed;
 					break;
 
-				case SDLK_UP:
+				case SDLK_w:
 					translate_y_factor += speed;
 					break;
 
-				case SDLK_DOWN:
+				case SDLK_s:
 					translate_y_factor -= speed;
 					break;
 
@@ -92,6 +92,14 @@ int main(int argc, char * argv[])
 
 				case SDLK_RSHIFT:
 					speed -= 0.01f;
+					break;
+
+				case SDLK_q:
+					rotate(rocket, degrees, 2.0f, 2.0f);
+					break;
+
+				case SDLK_e:
+					rotate(rocket,-degrees, 2.0f, 2.0f);
 					break;
 
 				default:
