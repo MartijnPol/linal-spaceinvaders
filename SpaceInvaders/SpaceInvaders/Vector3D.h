@@ -8,9 +8,9 @@ namespace math
 	struct Vector3D
 	{
 		Point origin{ 0, 0 };
-		std::size_t x, y, z;
+		float x, y, z;
 
-		Vector3D(const Point origin, const std::size_t x, const std::size_t y, const std::size_t z)
+		Vector3D(const Point origin, const float x, const float y, const float z)
 			: origin(origin), x(x), y(y), z(z) {}
 
 		Vector3D& operator+=(const Vector3D& other)
