@@ -31,13 +31,13 @@ namespace graphics
 
 		void draw_coordinate_system() const;
 		void draw_vector(Vector2D vector, preset_color preset_color) const;
-		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, preset_color preset_color) const;
+		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, const preset_color preset_color) const;
 		void draw_rectangle(SDL_Rect &rectangle, preset_color preset_color) const;
 		void draw_line(Point &start, Point &end, preset_color preset_color) const;
 		void clear() const;
 
 		template<typename T>
-		void draw_matrix(Matrix<T> &matrix, preset_color preset_color) const
+		void draw_matrix(Matrix<T> &matrix, const preset_color preset_color) const
 		{
 			for (auto i = 0; i < matrix.columns; ++i) {
 

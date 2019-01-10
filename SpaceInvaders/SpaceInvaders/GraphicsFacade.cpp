@@ -67,7 +67,7 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D>>& vectors, preset_color preset_color) const
+	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D>>& vectors, const preset_color preset_color) const
 	{
 		// NOT WORKING
 		for (auto&& vector : vectors)
