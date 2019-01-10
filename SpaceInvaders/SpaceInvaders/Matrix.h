@@ -129,9 +129,9 @@ namespace math
 	Matrix<T> scale(Matrix<T> &matrix, T scale_x, T scale_y)
 	{
 		auto scale_matrix = Matrix<T>(3, 3, { scale_x, 0, 0,
-								 0, scale_y, 0,
-								 0, 0, 1 });
-
+											  0, scale_y, 0,
+											  0, 0, 1 });
+		
 		return scale_matrix * matrix;
 	}
 
@@ -156,7 +156,6 @@ namespace math
 	Matrix<T> rotate(Matrix<T> &matrix, T degrees)
 	{
 		const auto radian = Math::degrees_to_radius(degrees);
-
 		auto rotation_matrix = Matrix<T>(3, 3, { cos(radian), -sin(radian), 0,
 												 sin(radian), cos(radian), 0,
 												 0, 0, 1 });
