@@ -29,12 +29,12 @@ int main(int argc, char * argv[])
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
 	auto rocket = Matrix<float>(3, 4, { 0, 0, 5, 5,
-											  0, 5, 5, 0,
-											  1, 1, 1, 1 });
+										0, 5, 5, 0,
+										1, 1, 1, 1 });
 
 	auto target = Matrix<float>(3, 4, { 0, 0, 5, 5,
-										  0, 5, 5, 0,
-										  1, 1, 1, 1 });
+										0, 5, 5, 0,
+										1, 1, 1, 1 });
 
 	const auto max_scale_factor = 0.5f;
 	auto scale_factor = 0.0f;
