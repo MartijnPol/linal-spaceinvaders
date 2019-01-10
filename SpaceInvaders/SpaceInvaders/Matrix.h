@@ -251,6 +251,14 @@ namespace math
 
 		return matrix;
 	}
+
+	template<class T>
+	bool operator==(const T& left, const T& right)
+	{
+		return left.inner == right.inner;
+	}
+
+
 #pragma endregion
 
 	template<class T>
@@ -258,7 +266,6 @@ namespace math
 	{
 		return stream << "Matrix -> " << matrix.columns << "\n";
 	}
-
 }
 
 #endif
