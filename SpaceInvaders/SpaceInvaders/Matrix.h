@@ -2,6 +2,7 @@
 #define MATH_MATRIX_H
 
 #include "Math.h"
+#include <utility>
 #include <vector>
 #include <cassert>
 #include <iostream>
@@ -10,32 +11,29 @@ namespace math
 {
 	template<typename T> struct Matrix
 	{
-		std::size_t rows, columns;
+		int rows, columns;
 		std::vector<T> inner;
 
-		Matrix(std::size_t rows, std::size_t columns)
-			: rows(rows), columns(columns), inner(rows * columns) {};
+		Matrix(const int rows, const int columns)
+			: rows(rows), columns(columns), inner(rows * columns) {}
 
-		Matrix(std::size_t rows, std::size_t columns, const std::vector<T>& values)
-			: rows(rows), columns(columns), inner(values) {};
+		Matrix(const int rows, const int columns, std::vector<T> values)
+			: rows(rows), columns(columns), inner(std::move(values)) {}
 
-		T operator() (std::size_t rows, std::size_t columns) {
+		T operator() (int rows, int columns) {
 			return inner[rows * this->columns + columns];
 		}
 
-		T const &operator() (std::size_t rows, std::size_t columns) const {
+		T const &operator() (int rows, int columns) const {
 			return inner[rows * this->columns + columns];
 		}
 
-		float at(std::size_t row, std::size_t column) { return inner[row * columns + column]; }
-		float at(std::size_t row, std::size_t column) const { return inner[row * columns + column]; }
-
-		void set(const int row, const int column, const float value)
-		{
-			inner[row * columns + column] = value;
-		}
+		float at(const int row, const int column) { return inner[row * columns + column]; }
+		float at(const int row, const int column) const { return inner[row * columns + column]; }
+		void set(const int row, const int column, const float value) { inner[row * columns + column] = value; }
 
 #pragma region Class Operator Overloading
+
 		Matrix<T>& operator+=(const Matrix<T>& other)
 		{
 			assert(rows == other.rows && columns == other.columns);
@@ -73,12 +71,14 @@ namespace math
 			}
 			return *this;
 		}
-#pragma endregion
 
 		~Matrix() = default;
 	};
 
+#pragma endregion
+
 #pragma region Operator overloading
+
 	template<class T>
 	Matrix<T> operator * (const T& left, const Matrix<T>& right) {
 		Matrix<T> result(right.rows, right.columns);
@@ -129,8 +129,8 @@ namespace math
 	Matrix<T> scale(Matrix<T> &matrix, T scale_x, T scale_y)
 	{
 		auto scale_matrix = Matrix<T>(3, 3, { scale_x, 0, 0,
-								 0, scale_y, 0,
-								 0, 0, 1 });
+											  0, scale_y, 0,
+											  0, 0, 1 });
 
 		return scale_matrix * matrix;
 	}
@@ -156,7 +156,6 @@ namespace math
 	Matrix<T> rotate(Matrix<T> &matrix, T degrees)
 	{
 		const auto radian = Math::degrees_to_radius(degrees);
-
 		auto rotation_matrix = Matrix<T>(3, 3, { cos(radian), -sin(radian), 0,
 												 sin(radian), cos(radian), 0,
 												 0, 0, 1 });
@@ -255,7 +254,8 @@ namespace math
 #pragma endregion
 
 	template<class T>
-	std::ostream& operator << (std::ostream &stream, Matrix<T> &matrix) {
+	std::ostream& operator << (std::ostream &stream, Matrix<T> &matrix)
+	{
 		return stream << "Matrix -> " << matrix.columns << "\n";
 	}
 

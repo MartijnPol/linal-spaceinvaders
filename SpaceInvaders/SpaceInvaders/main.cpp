@@ -28,9 +28,17 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto shape_matrix = Matrix<float>(3, 4, { 0, 0, 5, 5,
+	auto rocket = Matrix<float>(3, 4, { 0, 0, 5, 5,
 											  0, 5, 5, 0,
 											  1, 1, 1, 1 });
+
+	auto target = Matrix<float>(3, 4, { 0, 0, 5, 5,
+										  0, 5, 5, 0,
+										  1, 1, 1, 1 });
+
+	const auto max_scale_factor = 0.5f;
+	auto scale_factor = 0.0f;
+	auto reversed = false;
 
 	SDL_Event event;
 	while (is_running)
@@ -41,13 +49,27 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			graphics.draw_coordinate_system();
 
-			auto rotated_matrix = rotate(shape_matrix, degrees, 2.0f, 2.0f);
-			graphics.draw_matrix(rotated_matrix, GraphicsFacade::preset_color::blue);
+			auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
+			graphics.draw_matrix(rotated_rocket, GraphicsFacade::preset_color::blue);
+
+			auto scaled_target = scale(target, scale_factor, scale_factor);
+			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);
 
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT)
 			{
 				is_running = false;
+			}
+
+			if (scale_factor <= max_scale_factor && !reversed)
+			{
+				scale_factor += 0.01f;
+				if (scale_factor >= max_scale_factor) reversed = true;
+			}
+			else if (reversed)
+			{
+				scale_factor -= 0.01f;
+				if (scale_factor <= 0.0f) reversed = false;
 			}
 
 			timer.reset();

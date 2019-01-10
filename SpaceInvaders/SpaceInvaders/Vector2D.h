@@ -13,7 +13,7 @@ namespace math
 		float x = 0;
 		float y = 0;
 
-		Vector2D(Point origin, float x, float y)
+		Vector2D(const Point origin, const float x, const float y)
 			: origin(origin), x(x), y(y) {};
 
 		Vector2D& operator+=(const Vector2D &other)
