@@ -1,4 +1,5 @@
 ﻿#include "TimerFacade.h"
+#include <SDL.h>
 
 namespace utils
 {

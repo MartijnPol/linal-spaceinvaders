@@ -16,7 +16,7 @@ namespace graphics
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
-			this->_main_window = SDL_CreateWindow("LINAL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width * _spacing, _height * _spacing, SDL_WINDOW_SHOWN);
+			this->_main_window = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width * _spacing, _height * _spacing, SDL_WINDOW_SHOWN);
 			this->_renderer = SDL_CreateRenderer(_main_window, -1, 0);
 			return true;
 		}
