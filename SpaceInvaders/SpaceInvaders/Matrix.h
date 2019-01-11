@@ -104,6 +104,8 @@ namespace math
 	template<class T>
 	Matrix<T> operator * (const Matrix<T>& left, const Matrix<T>& right)
 	{
+		assert(left.rows == right.columns || left.columns == right.rows);
+
 		Matrix<T> result(left.rows, right.columns);
 
 		for (auto row = 0; row < result.rows; row++)
@@ -125,6 +127,7 @@ namespace math
 #pragma endregion
 
 #pragma region Rotations in 2D
+
 	template<class T>
 	Matrix<T> scale(Matrix<T> &matrix, T scale_x, T scale_y)
 	{
@@ -178,9 +181,11 @@ namespace math
 
 		return matrix;
 	}
+
 #pragma endregion
 
 #pragma region Rotations in 3D
+
 	template<class T>
 	Matrix<T> scale(Matrix<T> &matrix, T scale_x, T scale_y, T scale_z)
 	{
@@ -236,6 +241,7 @@ namespace math
 
 		return rotation_matrix * matrix;
 	}
+
 	template<class T>
 	Matrix<T> rotate_z(Matrix<T> &matrix, T degrees, T x, T y, T z)
 	{
@@ -248,19 +254,30 @@ namespace math
 		return rotation_matrix * matrix;
 	}
 
-	template<class T>
-	bool operator==(const T& left, const T& right)
-	{
-		return left.inner == right.inner;
-	}
-
-
 #pragma endregion
 
 	template<class T>
 	std::ostream& operator << (std::ostream &stream, Matrix<T> &matrix)
 	{
 		return stream << "Matrix -> " << matrix.columns << "\n";
+	}
+
+	template<class T>
+	bool operator==(const Matrix<T>& left, const Matrix<T>& right)
+	{
+		if (left.columns != right.columns || left.rows != right.rows)
+			return false;
+
+		for (size_t y = 0; y < right.rows; y++)
+		{
+			for (size_t x = 0; x < right.columns; x++)
+			{
+				if (left(y, x) != right(y, x))
+					return false;
+			}
+		}
+
+		return true;
 	}
 }
 
