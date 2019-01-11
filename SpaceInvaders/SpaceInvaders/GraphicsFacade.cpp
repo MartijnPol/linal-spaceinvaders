@@ -1,5 +1,6 @@
 #include "GraphicsFacade.h"
 #include "Matrix.h"
+#include <iostream>
 
 namespace graphics
 {

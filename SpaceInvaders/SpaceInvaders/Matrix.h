@@ -5,14 +5,13 @@
 #include <utility>
 #include <vector>
 #include <cassert>
-#include <iostream>
 #include "Vector3D.h"
 
 namespace math
 {
 	template<typename T> struct Matrix
 	{
-		int rows, columns;
+		int rows{ 0 }, columns{ 0 };
 		std::vector<T> inner;
 
 		Matrix() = default;

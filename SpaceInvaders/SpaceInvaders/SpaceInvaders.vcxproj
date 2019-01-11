@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GraphicsFacade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="TimerFacade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsFacade.h" />
     <ClInclude Include="Math.h" />

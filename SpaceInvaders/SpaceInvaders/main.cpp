@@ -2,6 +2,7 @@
 
 #include "TimerFacade.h"
 #include "SpaceShip.h"
+#include "Cube.h"
 
 using namespace graphics;
 using namespace utils;
@@ -14,21 +15,22 @@ int main(int argc, char * argv[])
 	auto is_running = true;
 
 	const auto spacing = 25;
-	const auto width = 30;
-	const auto height = 20;
+	const auto width = 50;
+	const auto height = 25;
 
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
 	auto space_ship = game::SpaceShip{ graphics, GraphicsFacade::preset_color::white };
+	auto cube = game::Cube{ graphics, GraphicsFacade::preset_color::red };
 
-	auto x = 10.0f;
-	auto y = -10.0f;
-	auto z = 30.0f;
-	auto size = 5.0f;
-	auto x_size = x + size;
-	auto y_size = y + size;
-	auto z_size = z + size;
+	//auto x = 10.0f;
+	//auto y = -10.0f;
+	//auto z = 30.0f;
+	//auto size = 5.0f;
+	//auto x_size = x + size;
+	//auto y_size = y + size;
+	//auto z_size = z + size;
 
 	/*auto target = Matrix<float>(4, 8, { x, y, z, x, y_size, z, x_size, y_size,
 										z, x_size, y, z, x, y, z_size, x,
@@ -51,9 +53,10 @@ int main(int argc, char * argv[])
 		{
 			graphics.clear();
 
-			space_ship.update();
+			//space_ship.update();
+			cube.update();
 
-			//Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
+			////Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
 
 			//translate_vector += Vector3D<float>({ 2,2 }, 5.0f, 3.0f, 1.0f);
 
@@ -79,26 +82,32 @@ int main(int argc, char * argv[])
 				{
 				case SDLK_w:
 					space_ship.increase_dive(2.0f);
+					cube.increase_dive(2.0f);
 					break;
 
 				case SDLK_a:
 					space_ship.decrease_turn(2.0f);
+					cube.decrease_turn(2.0f);
 					break;
 
 				case SDLK_s:
 					space_ship.decrease_dive(2.0f);
+					cube.decrease_dive(2.0f);
 					break;
 
 				case SDLK_d:
 					space_ship.increase_turn(2.0f);
+					cube.increase_turn(2.0f);
 					break;
 
 				case SDLK_q:
 					space_ship.decrease_roll(2.0f);
+					cube.decrease_roll(2.0f);
 					break;
 
 				case SDLK_e:
 					space_ship.increase_roll(2.0f);
+					cube.increase_roll(2.0f);
 					break;
 
 				case SDLK_LSHIFT:
