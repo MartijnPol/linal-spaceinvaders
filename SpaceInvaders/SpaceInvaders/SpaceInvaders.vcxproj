@@ -134,6 +134,7 @@
     <ClCompile Include="TimerFacade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsFacade.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Matrix.h" />

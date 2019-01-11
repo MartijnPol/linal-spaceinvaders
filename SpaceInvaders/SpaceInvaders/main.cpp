@@ -53,7 +53,6 @@ int main(int argc, char * argv[])
 			graphics.draw_coordinate_system();
 
 			space_ship.update();
-			space_ship.rotate({ { 2, 2 }, 1.0f, 1.0f, 2.0f });
 
 			//Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
 
@@ -79,20 +78,28 @@ int main(int argc, char * argv[])
 				const auto key = event.key.keysym.sym;
 				switch (key)
 				{
-				case SDLK_a:
-					translate_vector.z -= speed;
-					break;
-
-				case SDLK_d:
-					translate_vector.z += speed;
-					break;
-
 				case SDLK_w:
-					translate_vector.y += speed;
+					space_ship.increase_dive(2.0f);
+					break;
+
+				case SDLK_a:
+					space_ship.decrease_turn(2.0f);
 					break;
 
 				case SDLK_s:
-					translate_vector.y -= speed;
+					space_ship.decrease_dive(2.0f);
+					break;
+
+				case SDLK_d:
+					space_ship.increase_turn(2.0f);
+					break;
+
+				case SDLK_q:
+					space_ship.decrease_roll(2.0f);
+					break;
+
+				case SDLK_e:
+					space_ship.increase_roll(2.0f);
 					break;
 
 				case SDLK_LSHIFT:
@@ -102,14 +109,6 @@ int main(int argc, char * argv[])
 				case SDLK_RSHIFT:
 					speed -= 0.01f;
 					break;
-
-					//case SDLK_q:
-					//	rotate(translated_rocket, translate_vector);
-					//	break;
-
-					//case SDLK_e:
-					//	rotate(translated_rocket, translate_vector);
-					//	break;
 
 				default:
 					break;

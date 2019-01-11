@@ -12,12 +12,8 @@ namespace game
 
 	void SpaceShip::update()
 	{
+		object_matrix_ = rotate(object_matrix_, { {0,0}, turn(), dive(), roll() });
 		graphics_.draw_matrix(object_matrix_, color_);
-	}
-
-	void SpaceShip::rotate(const Vector3D<float> vector)
-	{
-		object_matrix_ = math::rotate(object_matrix_, vector);
 	}
 }
 
