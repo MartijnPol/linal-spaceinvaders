@@ -33,14 +33,22 @@ int main(int argc, char * argv[])
 										 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
 	);
 
-	auto target = Matrix<float>(4, 4, { 0.0f, 0.0f, 5.0f, 5.0f,
-										0.0f, 5.0f, 5.0f, 0.0f,
-										1.0f, 1.0f, 1.0f, 1.0f,
-										0.0f, 0.0f, 0.0f, 0.0f });
+	auto x = 10.0f;
+	auto y = -10.0f;
+	auto z = 30.0f;
+	auto size = 5.0f;
+	auto x_size = x + size;
+	auto y_size = y + size;
+	auto z_size = z + size;
+
+	/*auto target = Matrix<float>(4, 8, { x, y, z, x, y_size, z, x_size, y_size, 
+										z, x_size, y, z, x, y, z_size, x, 
+										y_size, z_size, x_size, y_size, z_size, x_size, y, z_size, 
+										0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });*/
 
 	Vector3D<float> translate_vector({ 2, 2 }, 1.0f, 1.0f, 1.0f);
 
-	const auto max_scale_factor = 0.5f;
+	const auto max_scale_factor = 0.2f;
 	auto scale_factor = 0.0f;
 	auto reversed = false;
 
@@ -64,9 +72,9 @@ int main(int argc, char * argv[])
 
 			graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
 
-			auto rotated_target = rotate(target, translate_vector);
+			/*auto rotated_target = rotate(target, translate_vector);
 			auto scaled_target = scale(rotated_target, scale_vector);
-			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);
+			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);*/
 
 			SDL_PollEvent(&event);
 
