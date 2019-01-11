@@ -5,15 +5,16 @@
 
 namespace math
 {
+	template<typename T>
 	struct Vector3D
 	{
 		Point origin{ 0, 0 };
-		float x, y, z;
+		T x, y, z;
 
-		Vector3D(const Point origin, const float x, const float y, const float z)
+		Vector3D(const Point origin, const T x, const T y, const T z)
 			: origin(origin), x(x), y(y), z(z) {}
 
-		Vector3D& operator+=(const Vector3D& other)
+		Vector3D<T>& operator+=(const Vector3D<T>& other)
 		{
 			this->x += other.x;
 			this->y += other.y;
@@ -22,7 +23,7 @@ namespace math
 			return *this;
 		}
 
-		Vector3D& operator-=(const Vector3D& other)
+		Vector3D<T>& operator-=(const Vector3D<T>& other)
 		{
 			this->x -= other.x;
 			this->y -= other.y;
@@ -31,7 +32,7 @@ namespace math
 			return *this;
 		}
 
-		Vector3D& operator*=(const float scalar)
+		Vector3D<T>& operator*=(const float scalar)
 		{
 			this->x = this->x * scalar;
 			this->y = this->y * scalar;
@@ -40,12 +41,12 @@ namespace math
 			return *this;
 		}
 
-		float inner_product(const Vector3D &other) const
+		float inner_product(const Vector3D<T> &other) const
 		{
 			return (x * other.x) + (y * other.y) + (z * other.z);
 		}
 
-		float angle(const Vector3D &other) const
+		float angle(const Vector3D<T> &other) const
 		{
 			return std::acos(inner_product(other) / (length() * other.length()));
 		}
@@ -55,9 +56,9 @@ namespace math
 			return std::sqrt(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2));
 		}
 
-		Vector3D cross_product(const Vector3D &other) const
+		Vector3D<T> cross_product(const Vector3D<T> &other) const
 		{
-			auto cross_vector = Vector3D({ origin.x, origin.y }, 0, 0, 0);
+			auto cross_vector = Vector3D<T>({ origin.x, origin.y }, 0, 0, 0);
 
 			cross_vector.x = (y * other.z - z * other.y);
 			cross_vector.y = (z * other.x - x * other.z);
@@ -67,7 +68,8 @@ namespace math
 		}
 	};
 
-	inline std::ostream& operator << (std::ostream &stream, const Vector3D &vector)
+	template <typename T>
+	inline std::ostream& operator << (std::ostream &stream, const Vector3D<T> &vector)
 	{
 		return stream << "Vector -> (X: " << vector.x << ", Y: " << vector.y << ", Z: " << vector.z << ")";
 	}

@@ -6,6 +6,7 @@
 #include <vector>
 #include <cassert>
 #include <iostream>
+#include "Vector3D.h"
 
 namespace math
 {
@@ -182,70 +183,97 @@ namespace math
 
 #pragma region Rotations in 3D
 	template<class T>
-	Matrix<T> scale(Matrix<T> &matrix, T scale_x, T scale_y, T scale_z)
+	Matrix<T> scale(Matrix<T> &matrix, Vector3D<T> &vector)
 	{
-		auto scale_matrix = Matrix<T>(4, 4, { scale_x, 0, 0, 0,
-											  0, scale_y, 0, 0,
-											  0, 0, scale_z, 0,
+		auto scale_matrix = Matrix<T>(4, 4, { vector.x, 0, 0, 0,
+											  0, vector.y, 0, 0,
+											  0, 0, vector.z, 0,
 											  0, 0, 0, 1 });
 
 		return scale_matrix * matrix;
 	}
 
 	template<class T>
-	Matrix<T> translate(Matrix<T> &matrix, T translate_x, T translate_y, T translate_z)
+	Matrix<T> translate(Matrix<T> &matrix, T x, T y, T z)
 	{
-		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, translate_x,
-													0, 1, 0, translate_y,
-													0, 0, 1, translate_z,
+		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, x,
+													0, 1, 0, y,
+													0, 0, 1, z,
 													0, 0, 0, 1 });
 
 		return translation_matrix * matrix;
 	}
 
 	template<class T>
-	Matrix<T> translate(T tx, T ty, T tz) {
-		return Matrix<T>(4, 4, { 1, 0, 0, tx,
-								 0, 1, 0, ty,
-								 0, 0, 1, tz,
+	Matrix<T> translate(Matrix<T> &matrix, Vector3D<T> &vector)
+	{
+		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, vector.x,
+													0, 1, 0, vector.y,
+													0, 0, 1, vector.z,
+													0, 0, 0, 1 });
+
+		return translation_matrix * matrix;
+	}
+
+	template<class T>
+	Matrix<T> translate(Vector3D<T> &vector) {
+		return Matrix<T>(4, 4, { 1, 0, 0, vector.x,
+								 0, 1, 0, vector.y,
+								 0, 0, 1, vector.z,
 								 0, 0, 0, 1 });
 	}
 
 	template<class T>
-	Matrix<T> rotate_x(Matrix<T> &matrix, T degrees)
+	Matrix<T> rotate_x(T radian)
 	{
-		const auto radian = Math::degrees_to_radius(degrees);
+		return Matrix<T>(4, 4, { 1, 0, 0, 0,
+								 0, cos(radian), -sin(radian), 0,
+								 0, sin(radian), cos(radian), 0,
+								 0, 0, 0, 1 });
 
-		auto rotation_matrix = Matrix<T>(4, 4, { 1, 0, 0, 0,
-												 0, cos(radian), -sin(radian), 0,
-												 0, sin(radian), cos(radian), 0,
-												 0, 0, 0, 1 });
 
-		return rotation_matrix * matrix;
 	}
 
 	template<class T>
-	Matrix<T> rotate_y(Matrix<T> &matrix, T degrees)
+	Matrix<T> rotate_y(T radian)
 	{
-		const auto radian = Math::degrees_to_radius(degrees);
+		return Matrix<T>(4, 4, { cos(radian), 0, sin(radian), 0,
+								 0, 1, 0, 0,
+								 -sin(radian), 0, cos(radian), 0,
+								 0, 0, 0, 1 });
 
-		auto rotation_matrix = Matrix<T>(4, 4, { cos(radian), 0, sin(radian), 0,
-												 0, 1, 0, 0,
-												 -sin(radian), 0, cos(radian), 0,
-												 0, 0, 0, 1 });
-
-		return rotation_matrix * matrix;
 	}
-	template<class T>
-	Matrix<T> rotate_z(Matrix<T> &matrix, T degrees, T x, T y, T z)
-	{
-		const auto radian = Math::degrees_to_radius(degrees);
-		auto rotation_matrix = Matrix<T>(4, 4, { cos(radian), -sin(radian), 0, 0,
-												 sin(radian), cos(radian), 0, 0,
-												 0, 0, 1, 0,
-												 0, 0, 0, 1 });
 
-		return rotation_matrix * matrix;
+	template<class T>
+	Matrix<T> rotate_z(T radian)
+	{
+		return Matrix<T>(4, 4, { cos(radian), -sin(radian), 0, 0,
+								 sin(radian), cos(radian), 0, 0,
+								 0, 0, 1, 0,
+								 0, 0, 0, 1 });
+	}
+
+	template<class T>
+	Matrix<T> rotate(Vector3D<T> vector) {
+		auto x_radius = Math::degrees_to_radius(vector.x);
+		auto y_radius = Math::degrees_to_radius(vector.y);
+		auto z_radius = Math::degrees_to_radius(vector.z);
+
+		auto x_rotation_matrix = rotate_x(x_radius);
+		auto y_rotation_matrix = rotate_y(y_radius);
+		auto z_rotation_matrix = rotate_z(z_radius);
+
+		return z_rotation_matrix * y_rotation_matrix * x_rotation_matrix;
+	}
+
+	template<class T>
+	Matrix<T> rotate(Matrix<T> &matrix, Vector3D<T> vector)
+	{
+		auto result = rotate(vector);
+
+		result = result * matrix;
+
+		return result;
 	}
 
 	template<class T>
@@ -253,7 +281,6 @@ namespace math
 	{
 		return left.inner == right.inner;
 	}
-
 
 #pragma endregion
 
