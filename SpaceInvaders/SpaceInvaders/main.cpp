@@ -28,14 +28,17 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto rocket = Matrix<float>(4, 4, { 0, 0, 5, 5,
-										0, 5, 5, 0,
-										1, 1, 1, 1,
-										1, 1, 1, 1 });
+	auto rocket = Matrix<float>(4, 10, { 0.0f, 0.0f, 2.0f, 1.0f, 0.0f, 1.0f, 2.0f, 0.0f, 2.0f, 1.0f,
+										 2.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 2.0f, 0.0f, 1.0f,
+										 0.0f, 2.0f, 0.0f, 1.0f, 2.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+										 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
+	);
 
 	auto target = Matrix<float>(3, 4, { 0, 0, 5, 5,
 										0, 5, 5, 0,
 										1, 1, 1, 1 });
+
+	Vector3D<float> translate_vector({ 2, 2 }, 2.0f, 2.0f, 2.0f);
 
 	const auto max_scale_factor = 0.5f;
 	auto scale_factor = 0.0f;
@@ -54,15 +57,16 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			graphics.draw_coordinate_system();
 
-			auto rotated_rocket = rotate(rocket, degrees, 2.0f, 2.0f);
-			auto translated_rocket = translate(rocket, translate_x_factor, translate_y_factor);
+			auto rotated_rocket = rotate(rocket, translate_vector);
+			auto translated_rocket = translate(rotated_rocket, translate_vector);
+
 			graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
 
 			auto scaled_target = scale(target, scale_factor, scale_factor);
 			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);
 
 			SDL_PollEvent(&event);
-			 
+
 			if (event.type == SDL_QUIT)
 			{
 				is_running = false;
@@ -73,19 +77,19 @@ int main(int argc, char * argv[])
 				switch (key)
 				{
 				case SDLK_a:
-					translate_x_factor -= speed;
+					translate_vector.z -= speed;
 					break;
 
 				case SDLK_d:
-					translate_x_factor += speed;
+					translate_vector.z += speed;
 					break;
 
 				case SDLK_w:
-					translate_y_factor += speed;
+					translate_vector.y += speed;
 					break;
 
 				case SDLK_s:
-					translate_y_factor -= speed;
+					translate_vector.y -= speed;
 					break;
 
 				case SDLK_LSHIFT:
@@ -97,11 +101,11 @@ int main(int argc, char * argv[])
 					break;
 
 				case SDLK_q:
-					rotate(rocket, degrees, 2.0f, 2.0f);
+					rotate(translated_rocket, translate_vector);
 					break;
 
 				case SDLK_e:
-					rotate(rocket,-degrees, 2.0f, 2.0f);
+					rotate(translated_rocket, translate_vector);
 					break;
 
 				default:
