@@ -1,15 +1,8 @@
 #include <iostream>
 
-#include "Point.h"
-#include "GraphicsFacade.h"
-#include "Matrix.h"
-#include "SDL.h"
-#include "ShapeFactory.h"
 #include "TimerFacade.h"
-#include <array>
+#include "SpaceShip.h"
 
-using namespace std;
-using namespace math;
 using namespace graphics;
 using namespace utils;
 
@@ -27,11 +20,7 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto rocket = Matrix<float>(4, 10, { 0.0f, 0.0f, 2.0f, 1.0f, 0.0f, 1.0f, 2.0f, 0.0f, 2.0f, 1.0f,
-										 2.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 2.0f, 0.0f, 1.0f,
-										 0.0f, 2.0f, 0.0f, 1.0f, 2.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-										 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f }
-	);
+	auto space_ship = game::SpaceShip{ graphics, GraphicsFacade::preset_color::red };
 
 	auto x = 10.0f;
 	auto y = -10.0f;
@@ -41,9 +30,9 @@ int main(int argc, char * argv[])
 	auto y_size = y + size;
 	auto z_size = z + size;
 
-	/*auto target = Matrix<float>(4, 8, { x, y, z, x, y_size, z, x_size, y_size, 
-										z, x_size, y, z, x, y, z_size, x, 
-										y_size, z_size, x_size, y_size, z_size, x_size, y, z_size, 
+	/*auto target = Matrix<float>(4, 8, { x, y, z, x, y_size, z, x_size, y_size,
+										z, x_size, y, z, x, y, z_size, x,
+										y_size, z_size, x_size, y_size, z_size, x_size, y, z_size,
 										0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });*/
 
 	Vector3D<float> translate_vector({ 2, 2 }, 1.0f, 1.0f, 1.0f);
@@ -63,14 +52,17 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			graphics.draw_coordinate_system();
 
-			Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
+			space_ship.update();
+			space_ship.rotate({ { 2, 2 }, 1.0f, 1.0f, 2.0f });
 
-			translate_vector += Vector3D<float>({ 2,2 }, 5.0f, 3.0f, 1.0f);
+			//Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
 
-			auto rotated_rocket = rotate(rocket, translate_vector);
-			auto translated_rocket = translate(rotated_rocket, translate_vector);
+			//translate_vector += Vector3D<float>({ 2,2 }, 5.0f, 3.0f, 1.0f);
 
-			graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
+			//auto rotated_rocket = rotate(rocket, translate_vector);
+			//auto translated_rocket = translate(rotated_rocket, translate_vector);
+
+			//graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
 
 			/*auto rotated_target = rotate(target, translate_vector);
 			auto scaled_target = scale(rotated_target, scale_vector);
@@ -111,13 +103,13 @@ int main(int argc, char * argv[])
 					speed -= 0.01f;
 					break;
 
-				case SDLK_q:
-					rotate(translated_rocket, translate_vector);
-					break;
+					//case SDLK_q:
+					//	rotate(translated_rocket, translate_vector);
+					//	break;
 
-				case SDLK_e:
-					rotate(translated_rocket, translate_vector);
-					break;
+					//case SDLK_e:
+					//	rotate(translated_rocket, translate_vector);
+					//	break;
 
 				default:
 					break;

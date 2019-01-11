@@ -31,6 +31,12 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{17008ef6-b77e-4945-a83e-1b548ec7be8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{963bb962-e55d-41d2-b5c2-7cebe5ac5cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{50d0f061-a389-4a56-8f15-1f256f34da0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="TimerFacade.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SpaceShip.cpp">
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Vector3D.h">
       <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceShip.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

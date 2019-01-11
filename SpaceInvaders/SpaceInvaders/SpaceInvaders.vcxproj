@@ -130,6 +130,7 @@
     <ClCompile Include="GraphicsFacade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
     <ClCompile Include="TimerFacade.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="ShapeFactory.h" />
+    <ClInclude Include="SpaceShip.h" />
     <ClInclude Include="TimerFacade.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />

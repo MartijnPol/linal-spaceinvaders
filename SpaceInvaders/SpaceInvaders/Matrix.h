@@ -15,6 +15,8 @@ namespace math
 		int rows, columns;
 		std::vector<T> inner;
 
+		Matrix() = default;
+
 		Matrix(const int rows, const int columns)
 			: rows(rows), columns(columns), inner(rows * columns) {}
 
