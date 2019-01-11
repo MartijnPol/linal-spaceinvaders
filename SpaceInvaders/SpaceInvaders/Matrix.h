@@ -20,12 +20,12 @@ namespace math
 		Matrix(const int rows, const int columns, std::vector<T> values)
 			: rows(rows), columns(columns), inner(std::move(values)) {}
 
-		T operator() (int rows, int columns) {
-			return inner[rows * this->columns + columns];
+		T operator() (const int row, const int column) {
+			return inner[row * columns + column];
 		}
 
-		T const &operator() (int rows, int columns) const {
-			return inner[rows * this->columns + columns];
+		T const &operator() (const int row, const int column) const {
+			return inner[row * columns + column];
 		}
 
 		float at(const int row, const int column) { return inner[row * columns + column]; }
@@ -104,8 +104,6 @@ namespace math
 	template<class T>
 	Matrix<T> operator * (const Matrix<T>& left, const Matrix<T>& right)
 	{
-		assert(left.rows == right.columns || left.columns == right.rows);
-
 		Matrix<T> result(left.rows, right.columns);
 
 		for (auto row = 0; row < result.rows; row++)
@@ -243,7 +241,7 @@ namespace math
 	}
 
 	template<class T>
-	Matrix<T> rotate_z(Matrix<T> &matrix, T degrees, T x, T y, T z)
+	Matrix<T> rotate_z(Matrix<T> &matrix, T degrees)
 	{
 		const auto radian = Math::degrees_to_radius(degrees);
 		auto rotation_matrix = Matrix<T>(4, 4, { cos(radian), -sin(radian), 0, 0,
