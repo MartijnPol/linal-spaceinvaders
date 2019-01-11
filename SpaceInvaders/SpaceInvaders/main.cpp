@@ -20,7 +20,7 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto space_ship = game::SpaceShip{ graphics, GraphicsFacade::preset_color::red };
+	auto space_ship = game::SpaceShip{ graphics, GraphicsFacade::preset_color::white };
 
 	auto x = 10.0f;
 	auto y = -10.0f;
@@ -50,7 +50,6 @@ int main(int argc, char * argv[])
 		if (timer.delta_time() >= 1.0f / 60.0f)
 		{
 			graphics.clear();
-			graphics.draw_coordinate_system();
 
 			space_ship.update();
 

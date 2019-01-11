@@ -31,28 +31,6 @@ namespace graphics
 		std::cout << "DRAW_TEXT IS NOT IMPLEMENTED" << "\n";
 	}
 
-	void GraphicsFacade::draw_coordinate_system() const
-	{
-		SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
-		SDL_RenderClear(renderer_);
-		SDL_SetRenderDrawColor(renderer_, 211, 211, 211, 255);
-
-		for (auto x = 0; x < width_; ++x)
-		{
-			for (auto y = 0; y < height_; ++y)
-			{
-				SDL_Rect rect{ x * spacing_, y * spacing_, spacing_, spacing_ };
-				SDL_RenderDrawRect(renderer_, &rect);
-			}
-		}
-
-		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-		SDL_RenderDrawLine(renderer_, width_ * spacing_ / 2, height_ * spacing_, width_ * spacing_ / 2, 0);
-		SDL_RenderDrawLine(renderer_, width_ * spacing_, height_ * spacing_ / 2, 0, height_ * spacing_ / 2);
-
-		SDL_RenderPresent(renderer_);
-	}
-
 	void GraphicsFacade::draw_vector(const Vector2D vector, preset_color preset_color) const
 	{
 		auto center_of_system = Point(width_ / 2.0f, height_ / 2.0f);
@@ -119,6 +97,8 @@ namespace graphics
 
 	void GraphicsFacade::clear() const
 	{
+		SDL_RenderClear(renderer_);
+		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 		SDL_RenderClear(renderer_);
 	}
 }

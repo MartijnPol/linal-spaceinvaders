@@ -29,7 +29,6 @@ namespace graphics
 		GraphicsFacade(int width, int height, int spacing);
 		~GraphicsFacade();
 
-		void draw_coordinate_system() const;
 		void draw_vector(Vector2D vector, preset_color preset_color) const;
 		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, const preset_color preset_color) const;
 		void draw_rectangle(SDL_Rect &rectangle, preset_color preset_color) const;
