@@ -4,11 +4,11 @@ namespace game
 {
 	Cube::Cube(graphics::GraphicsFacade & graphics_facade, const graphics::GraphicsFacade::preset_color color) : graphics_(graphics_facade), color_(color)
 	{
-		const auto s = 5.0f;
-		object_matrix_ = Matrix<float>(4, 8, { 0, 0, s, s, 0, 0, s, s,
-											   0, s, s, 0, 0, s, s, 0,
-											   0, 0, 0, 0, s, s, s, s,
-											   0, 0, 0, 0, 0, 0, 0, 0 });
+		const auto s = 2.5f;
+		object_matrix_ = Matrix<float>(4, 24, {s, -s, -s, s,  s, -s, -s,  s, s, -s, -s,  s,  s, -s, -s, s, -s,-s,-s,-s, s, s, s, s,
+											   s,  s,  s, s, -s, -s, -s, -s, s,  s, -s, -s, -s, -s,  s, s,  s, s,-s,-s, s, s,-s,-s,
+											  -s, -s,  s, s,  s,  s, -s, -s, s,  s,  s,  s, -s, -s, -s,-s,  s,-s,-s, s,-s, s, s,-s,
+											   0,  0,  0, 0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0, 0,  0, 0, 0, 0, 0, 0, 0, 0  });
 	}
 
 	void Cube::update()
