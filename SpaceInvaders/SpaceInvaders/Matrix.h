@@ -198,6 +198,17 @@ namespace math
 	}
 
 	template<class T>
+	Matrix<T> scale(Vector3D<T> &vector)
+	{
+		auto scale_matrix = Matrix<T>(4, 4, { vector.x, 0, 0, 0,
+											  0, vector.y, 0, 0,
+											  0, 0, vector.z, 0,
+											  0, 0, 0, 1 });
+
+		return scale_matrix;
+	}
+
+	template<class T>
 	Matrix<T> translate(Matrix<T> &matrix, T x, T y, T z)
 	{
 		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, x,

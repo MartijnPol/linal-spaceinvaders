@@ -24,6 +24,9 @@ namespace graphics
 		void draw_line(Vector2D<float> &start, Vector2D<float> &end, Color color) const;
 		void clear() const;
 
+		float width() const noexcept { return width_; }
+		float height() const noexcept { return height_; }
+
 		template<typename T>
 		void draw_matrix(Matrix<T> &matrix, const Color color) const
 		{
@@ -32,7 +35,7 @@ namespace graphics
 				Vector2D<T> start{ 0.0f, 0.0f };
 				Vector2D<T> end{ 0.0f, 0.0f };
 
-				if (i == matrix.columns - 1) 
+				if (i == matrix.columns - 1)
 				{
 					start.x = matrix.at(0, i);
 					start.y = matrix.at(1, i);
@@ -40,7 +43,7 @@ namespace graphics
 					end.x = matrix.at(0, 0);
 					end.y = matrix.at(1, 0);
 				}
-				else 
+				else
 				{
 					start.x = matrix.at(0, i);
 					start.y = matrix.at(1, i);

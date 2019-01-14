@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	auto graphics = GraphicsFacade{ width, height };
 
 	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f} };
-	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{5.0f, 5.0f, 0.0f}, true };
+	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
 	auto speed = 20.0f;
 
@@ -32,8 +32,7 @@ int main(int argc, char * argv[])
 		if (timer.delta_time() >= 0.1f / 60.0f)
 		{
 			graphics.clear();
-
-			space_ship.update();
+			//space_ship.update();
 			target.update();
 
 			SDL_PollEvent(&event);

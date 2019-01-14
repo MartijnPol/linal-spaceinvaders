@@ -20,7 +20,7 @@ namespace game
 		float max_scale_factor_{ 1.5f };
 		float scale_factor_{ 1.0f };
 		bool reversed_{ false };
-		float pulse_speed_{ 0.02f };
+		float pulse_speed_{ 0.03f };
 
 		void pulse();
 	};
