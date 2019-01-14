@@ -45,9 +45,6 @@
     <ClCompile Include="GraphicsFacade.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Source Files\math</Filter>
-    </ClCompile>
     <ClCompile Include="TimerFacade.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
@@ -68,9 +65,6 @@
     <ClInclude Include="Matrix.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Header Files\math</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
@@ -89,11 +83,11 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\game\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

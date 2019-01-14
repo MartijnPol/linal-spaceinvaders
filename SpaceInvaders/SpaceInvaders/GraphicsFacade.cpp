@@ -27,15 +27,10 @@ namespace graphics
 		return false;
 	}
 
-	void GraphicsFacade::draw_text(std::string& message, Point& location) const
+	void GraphicsFacade::draw_vector(const Vector2D<float> vector, const Color color) const
 	{
-		std::cout << "DRAW_TEXT IS NOT IMPLEMENTED" << "\n";
-	}
-
-	void GraphicsFacade::draw_vector(const Vector2D vector, const Color color) const
-	{
-		auto center_of_system = Point(width_ / 2.0f, height_ / 2.0f);
-		const auto origin = center_of_system.add(vector.origin);
+		const auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
+		const auto origin = center_of_system + vector;
 
 		const auto x = (origin.x + vector.x) * spacing_;
 		const auto y = (origin.y + vector.y) * spacing_;
@@ -45,13 +40,13 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D>>& vectors, const Color color) const
+	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D<float>>>& vectors, const Color color) const
 	{
 		// NOT WORKING
 		for (auto&& vector : vectors)
 		{
-			auto center_of_system = Point(width_ / 2.0f, height_ / 2.0f);
-			const auto origin = center_of_system.add(vector->origin);
+			auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
+			const auto origin = center_of_system + *vector;
 
 			const auto x = (origin.x + vector->x) * spacing_;
 			const auto y = (origin.y + vector->y) * spacing_;
@@ -67,8 +62,8 @@ namespace graphics
 	{
 		auto new_rectangle = SDL_Rect{ rectangle.x, rectangle.y, rectangle.w, rectangle.h };
 
-		auto center_of_system = Point(width_ / 2.0f, height_ / 2.0f);
-		const auto origin = center_of_system.add({ static_cast<float>(new_rectangle.x), static_cast<float>(new_rectangle.y) });
+		const auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
+		const auto origin = center_of_system + Vector2D<float>{ static_cast<float>(new_rectangle.x), static_cast<float>(new_rectangle.y) };
 
 		new_rectangle.x = origin.x * spacing_;
 		new_rectangle.y = origin.y * spacing_;
@@ -78,7 +73,7 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_line(Point& start, Point& end, const Color color) const
+	void GraphicsFacade::draw_line(Vector2D<float>& start, Vector2D<float>& end, const Color color) const
 	{
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 

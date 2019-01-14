@@ -12,7 +12,7 @@ namespace utils
 	class ShapeFactory
 	{
 	public:
-		enum shape { spaceship, target, bullet };
+		enum shape { spaceship, cube, bullet };
 
 		ShapeFactory() = default;
 		~ShapeFactory() = default;
@@ -30,7 +30,7 @@ namespace utils
 										  0.0f, 5.0f, 0.0f, 3.0f, 5.0f, 3.0f, 0.0f, 0.0f, 0.0f, 3.0f,
 										  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });
 
-			case target:
+			case cube:
 				return Matrix<T>(4, 24, { s, -s, -s, s,  s, -s, -s,  s, s, -s, -s,  s,  s, -s, -s, s, -s,-s,-s,-s, s, s, s, s,
 										  s,  s,  s, s, -s, -s, -s, -s, s,  s, -s, -s, -s, -s,  s, s,  s, s,-s,-s, s, s,-s,-s,
 										 -s, -s,  s, s,  s,  s, -s, -s, s,  s,  s,  s, -s, -s, -s,-s,  s,-s,-s, s,-s, s, s,-s,

@@ -9,7 +9,7 @@ namespace game
 	class GameObject
 	{
 	public:
-		explicit GameObject() = default;
+		explicit GameObject(Vector3D<T> origin) : origin_(origin) {}
 
 		void increase_turn(const float turn) noexcept { turn_value_ += turn; }
 		void decrease_turn(const float turn) noexcept { turn_value_ -= turn; }
@@ -25,6 +25,7 @@ namespace game
 
 	protected:
 		Matrix<T> object_matrix_;
+		Vector3D<T> origin_;
 		float turn_value_{};
 		float roll_value_{};
 		float dive_value_{};

@@ -20,10 +20,10 @@ namespace graphics
 		GraphicsFacade(int width, int height, int spacing);
 		~GraphicsFacade();
 
-		void draw_vector(Vector2D vector, Color color) const;
-		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, const Color color) const;
+		void draw_vector(Vector2D<float> vector, Color color) const;
+		void draw_outline(const std::vector<std::unique_ptr<Vector2D<float>>> &vectors, Color color) const;
 		void draw_rectangle(SDL_Rect &rectangle, Color color) const;
-		void draw_line(Point &start, Point &end, Color color) const;
+		void draw_line(Vector2D<float> &start, Vector2D<float> &end, Color color) const;
 		void clear() const;
 
 		template<typename T>
@@ -31,8 +31,8 @@ namespace graphics
 		{
 			for (auto i = 0; i < matrix.columns; ++i) {
 
-				Point start{ 0,0 };
-				Point end{ 0,0 };
+				Vector2D<T> start{ 0.0f, 0.0f };
+				Vector2D<T> end{ 0.0f, 0.0f };
 
 				if (i == matrix.columns - 1) {
 					start.x = matrix.at(0, i);
@@ -49,8 +49,8 @@ namespace graphics
 					end.y = matrix.at(1, i + 1);
 				}
 
-				start = Point(width_ / 2.0f, height_ / 2.0f).add(start);
-				end = Point(width_ / 2.0f, height_ / 2.0f).add(end);
+				start = Vector2D<T>(width_ / 2.0f, height_ / 2.0f) + start;
+				end = Vector2D<T>(width_ / 2.0f, height_ / 2.0f) + end;
 
 				draw_line(start, end, color);
 			}
@@ -60,9 +60,8 @@ namespace graphics
 		int width_, height_, spacing_;
 		SDL_Window *main_window_;
 		SDL_Renderer *renderer_;
-		
+
 		bool init();
-		void draw_text(std::string &message, Point &location) const;
 	};
 }
 

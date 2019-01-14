@@ -9,7 +9,7 @@ namespace game
 	class SpaceShip : public GameObject<float>
 	{
 	public:
-		explicit SpaceShip(graphics::GraphicsFacade& graphics_facade, graphics::Color color);
+		explicit SpaceShip(graphics::GraphicsFacade& graphics_facade, graphics::Color color, Vector3D<float> origin);
 		void update();
 
 	private:

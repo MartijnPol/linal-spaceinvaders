@@ -283,12 +283,6 @@ namespace math
 #pragma endregion
 
 	template<class T>
-	std::ostream& operator << (std::ostream &stream, Matrix<T> &matrix)
-	{
-		return stream << "Matrix -> " << matrix.columns << "\n";
-	}
-
-	template<class T>
 	bool operator==(const Matrix<T>& left, const Matrix<T>& right)
 	{
 		if (left.columns != right.columns || left.rows != right.rows)

@@ -1,18 +1,15 @@
 #ifndef MATH_VECTOR_3D_H
 #define MATH_VECTOR_3D_H
 
-#include "Point.h"
-
 namespace math
 {
 	template<typename T>
 	struct Vector3D
 	{
-		Point origin{ 0, 0 };
 		T x, y, z;
 
-		Vector3D(const Point origin, const T x, const T y, const T z)
-			: origin(origin), x(x), y(y), z(z) {}
+		Vector3D(const T x, const T y, const T z)
+			: x(x), y(y), z(z) {}
 
 		Vector3D<T>& operator+=(const Vector3D<T>& other)
 		{
@@ -58,7 +55,7 @@ namespace math
 
 		Vector3D<T> cross_product(const Vector3D<T> &other) const
 		{
-			auto cross_vector = Vector3D<T>({ origin.x, origin.y }, 0, 0, 0);
+			auto cross_vector = Vector3D<T>({ x, y }, 0, 0, 0);
 
 			cross_vector.x = (y * other.z - z * other.y);
 			cross_vector.y = (z * other.x - x * other.z);
@@ -67,12 +64,6 @@ namespace math
 			return cross_vector;
 		}
 	};
-
-	template <typename T>
-	std::ostream& operator << (std::ostream &stream, const Vector3D<T> &vector)
-	{
-		return stream << "Vector -> (X: " << vector.x << ", Y: " << vector.y << ", Z: " << vector.z << ")";
-	}
 }
 
 #endif

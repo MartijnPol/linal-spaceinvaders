@@ -21,27 +21,8 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto space_ship = game::SpaceShip{ graphics, colors::WHITE };
-	auto cube = game::Cube{ graphics, colors::RED };
-
-	//auto x = 10.0f;
-	//auto y = -10.0f;
-	//auto z = 30.0f;
-	//auto size = 5.0f;
-	//auto x_size = x + size;
-	//auto y_size = y + size;
-	//auto z_size = z + size;
-
-	/*auto target = Matrix<float>(4, 8, { x, y, z, x, y_size, z, x_size, y_size,
-										z, x_size, y, z, x, y, z_size, x,
-										y_size, z_size, x_size, y_size, z_size, x_size, y, z_size,
-										0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });*/
-
-	Vector3D<float> translate_vector({ 2, 2 }, 1.0f, 1.0f, 1.0f);
-
-	const auto max_scale_factor = 0.2f;
-	auto scale_factor = 0.0f;
-	auto reversed = false;
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f,0.0f, 0.0f} };
+	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
 	auto speed = 0.1f;
 
@@ -53,21 +34,8 @@ int main(int argc, char * argv[])
 		{
 			graphics.clear();
 
-			space_ship.update();
-			//cube.update();
-
-			////Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
-
-			//translate_vector += Vector3D<float>({ 2,2 }, 5.0f, 3.0f, 1.0f);
-
-			//auto rotated_rocket = rotate(rocket, translate_vector);
-			//auto translated_rocket = translate(rotated_rocket, translate_vector);
-
-			//graphics.draw_matrix(translated_rocket, GraphicsFacade::preset_color::blue);
-
-			/*auto rotated_target = rotate(target, translate_vector);
-			auto scaled_target = scale(rotated_target, scale_vector);
-			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);*/
+			//space_ship.update();
+			target.update();
 
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT)
@@ -81,32 +49,32 @@ int main(int argc, char * argv[])
 				{
 				case SDLK_w:
 					space_ship.increase_dive(2.0f);
-					cube.increase_dive(2.0f);
+					target.increase_dive(2.0f);
 					break;
 
 				case SDLK_a:
 					space_ship.decrease_turn(2.0f);
-					cube.decrease_turn(2.0f);
+					target.decrease_turn(2.0f);
 					break;
 
 				case SDLK_s:
 					space_ship.decrease_dive(2.0f);
-					cube.decrease_dive(2.0f);
+					target.decrease_dive(2.0f);
 					break;
 
 				case SDLK_d:
 					space_ship.increase_turn(2.0f);
-					cube.increase_turn(2.0f);
+					target.increase_turn(2.0f);
 					break;
 
 				case SDLK_q:
 					space_ship.decrease_roll(2.0f);
-					cube.decrease_roll(2.0f);
+					target.decrease_roll(2.0f);
 					break;
 
 				case SDLK_e:
 					space_ship.increase_roll(2.0f);
-					cube.increase_roll(2.0f);
+					target.increase_roll(2.0f);
 					break;
 
 				case SDLK_LSHIFT:
@@ -120,17 +88,6 @@ int main(int argc, char * argv[])
 				default:
 					break;
 				}
-			}
-
-			if (scale_factor <= max_scale_factor && !reversed)
-			{
-				scale_factor += 0.01f;
-				if (scale_factor >= max_scale_factor) reversed = true;
-			}
-			else if (reversed)
-			{
-				scale_factor -= 0.01f;
-				if (scale_factor <= 0.0f) reversed = false;
 			}
 
 			timer.reset();
