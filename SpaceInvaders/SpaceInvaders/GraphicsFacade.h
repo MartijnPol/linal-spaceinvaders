@@ -22,6 +22,7 @@ namespace graphics
 
 		void draw_vector(Vector2D<float> vector, Color color) const;
 		void draw_line(Vector2D<float> &start, Vector2D<float> &end, Color color) const;
+		void draw_axes() const;
 		void clear() const;
 
 		float width() const noexcept { return width_; }

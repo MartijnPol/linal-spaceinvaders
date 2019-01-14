@@ -51,10 +51,21 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
+	void GraphicsFacade::draw_axes() const
+	{
+		SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 100);
+		
+		SDL_RenderDrawLine(renderer_, 0, height_ / 2, width_, height_ / 2);
+		SDL_RenderDrawLine(renderer_, width_ / 2, 0, width_ / 2, height_);
+		SDL_RenderPresent(renderer_);
+	}
+
 	void GraphicsFacade::clear() const
 	{
 		SDL_RenderClear(renderer_);
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 		SDL_RenderClear(renderer_);
+
+		draw_axes();
 	}
 }
