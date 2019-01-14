@@ -14,23 +14,22 @@ int main(int argc, char * argv[])
 
 	auto is_running = true;
 
-	const auto spacing = 25;
-	const auto width = 50;
-	const auto height = 25;
+	const auto width = 960;
+	const auto height = 640;
 
 	auto timer = TimerFacade{};
-	auto graphics = GraphicsFacade{ width,height,spacing };
+	auto graphics = GraphicsFacade{ width, height };
 
-	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{5.0f,5.0f, -25.0f} };
-	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f} };
+	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{5.0f, 5.0f, 0.0f}, true };
 
-	auto speed = 0.1f;
+	auto speed = 20.0f;
 
 	SDL_Event event;
 	while (is_running)
 	{
 		timer.update();
-		if (timer.delta_time() >= 1.0f / 60.0f)
+		if (timer.delta_time() >= 0.1f / 60.0f)
 		{
 			graphics.clear();
 
@@ -48,33 +47,27 @@ int main(int argc, char * argv[])
 				switch (key)
 				{
 				case SDLK_w:
-					space_ship.increase_dive(2.0f);
-					target.increase_dive(2.0f);
+					space_ship.increase_dive(speed);
 					break;
 
 				case SDLK_a:
-					space_ship.decrease_turn(2.0f);
-					target.decrease_turn(2.0f);
+					space_ship.decrease_turn(speed);
 					break;
 
 				case SDLK_s:
-					space_ship.decrease_dive(2.0f);
-					target.decrease_dive(2.0f);
+					space_ship.decrease_dive(speed);
 					break;
 
 				case SDLK_d:
-					space_ship.increase_turn(2.0f);
-					target.increase_turn(2.0f);
+					space_ship.increase_turn(speed);
 					break;
 
 				case SDLK_q:
-					space_ship.decrease_roll(2.0f);
-					target.decrease_roll(2.0f);
+					space_ship.decrease_roll(speed);
 					break;
 
 				case SDLK_e:
-					space_ship.increase_roll(2.0f);
-					target.increase_roll(2.0f);
+					space_ship.increase_roll(speed);
 					break;
 
 				case SDLK_LSHIFT:

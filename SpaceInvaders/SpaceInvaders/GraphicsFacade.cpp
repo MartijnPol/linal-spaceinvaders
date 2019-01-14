@@ -4,11 +4,10 @@
 
 namespace graphics
 {
-	GraphicsFacade::GraphicsFacade(const int width, const int height, const int spacing) : main_window_(nullptr), renderer_(nullptr)
+	GraphicsFacade::GraphicsFacade(const int width, const int height) : main_window_(nullptr), renderer_(nullptr)
 	{
 		this->width_ = width;
 		this->height_ = height;
-		this->spacing_ = spacing;
 
 		init();
 	}
@@ -19,7 +18,7 @@ namespace graphics
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
-			this->main_window_ = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_ * spacing_, height_ * spacing_, SDL_WINDOW_SHOWN);
+			this->main_window_ = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN);
 			this->renderer_ = SDL_CreateRenderer(main_window_, -1, 0);
 			return true;
 		}
@@ -32,44 +31,11 @@ namespace graphics
 		const auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
 		const auto origin = center_of_system + vector;
 
-		const auto x = (origin.x + vector.x) * spacing_;
-		const auto y = (origin.y + vector.y) * spacing_;
+		const auto x = origin.x + vector.x;
+		const auto y = origin.y + vector.y;
 
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
-		SDL_RenderDrawLine(renderer_, origin.x * spacing_, origin.y * spacing_, x, y);
-		SDL_RenderPresent(renderer_);
-	}
-
-	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D<float>>>& vectors, const Color color) const
-	{
-		// NOT WORKING
-		for (auto&& vector : vectors)
-		{
-			auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
-			const auto origin = center_of_system + *vector;
-
-			const auto x = (origin.x + vector->x) * spacing_;
-			const auto y = (origin.y + vector->y) * spacing_;
-
-			SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
-			SDL_RenderDrawLine(renderer_, origin.x * spacing_, origin.y * spacing_, x, y);
-
-			SDL_RenderPresent(renderer_);
-		}
-	}
-
-	void GraphicsFacade::draw_rectangle(SDL_Rect &rectangle, const Color color) const
-	{
-		auto new_rectangle = SDL_Rect{ rectangle.x, rectangle.y, rectangle.w, rectangle.h };
-
-		const auto center_of_system = Vector2D<float>(width_ / 2.0f, height_ / 2.0f);
-		const auto origin = center_of_system + Vector2D<float>{ static_cast<float>(new_rectangle.x), static_cast<float>(new_rectangle.y) };
-
-		new_rectangle.x = origin.x * spacing_;
-		new_rectangle.y = origin.y * spacing_;
-
-		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
-		SDL_RenderDrawRect(renderer_, &new_rectangle);
+		SDL_RenderDrawLine(renderer_, origin.x, origin.y, x, y);
 		SDL_RenderPresent(renderer_);
 	}
 
@@ -77,11 +43,11 @@ namespace graphics
 	{
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 
-		const auto starting_x = start.x * spacing_;
-		const auto starting_y = start.y * spacing_;
+		const auto starting_x = start.x;
+		const auto starting_y = start.y;
 
-		const auto end_x = end.x * spacing_;
-		const auto end_y = end.y * spacing_;
+		const auto end_x = end.x;
+		const auto end_y = end.y;
 
 		SDL_RenderDrawLine(renderer_, starting_x, starting_y, end_x, end_y);
 		SDL_RenderPresent(renderer_);

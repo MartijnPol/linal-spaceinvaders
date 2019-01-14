@@ -28,6 +28,8 @@ namespace game
 		{
 			graphics_.draw_matrix(object_matrix_, color_);
 		}
+
+		reset();
 	}
 
 	void Cube::pulse()

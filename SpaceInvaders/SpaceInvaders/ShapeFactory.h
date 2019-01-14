@@ -18,8 +18,11 @@ namespace utils
 		template <typename T>
 		static Matrix<T> get_shape(const shape shape, Vector3D<T> origin)
 		{
-			const auto s = 2.5f;
-
+			const auto s = 25.0f;
+			
+			const auto w = 35.0f;
+			const auto h = 60.0f;
+			
 			auto x = origin.x;
 			auto y = origin.y;
 			auto z = origin.z;
@@ -27,16 +30,16 @@ namespace utils
 			switch (shape)
 			{
 			case spaceship:
-				return Matrix<T>(4, 10, { x, x, x + 5.0f, x + 3.0f, x, x + 3.0f, x + 5.0f, x, x + 5.0f, x + 3.0f,
-										  y + 5.0f, y, y, y + 3.0f, y, y + 3.0f, y, y + 5.0f, y, y + 3.0f,
-										  z, z + 5.0f, z, z + 3.0f, z + 5.0f, z + 3.0f, z, z, z, z + 3.0f,
+				return Matrix<T>(4, 10, { x, x, x + w, x + h, x, x + h, x + w, x, x + w, x + h,
+										  y + w, y, y, y + h, y, y + h, y, y + w, y, y + h,
+										  z, z + w, z, z + h, z + w, z + h, z, z, z, z + h,
 										  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });
 
 			case cube:
-				return Matrix<T>(4, 24, { s, -s, -s, s,  s, -s, -s,  s, s, -s, -s,  s,  s, -s, -s, s, -s,-s,-s,-s, s, s, s, s,
-										  s,  s,  s, s, -s, -s, -s, -s, s,  s, -s, -s, -s, -s,  s, s,  s, s,-s,-s, s, s,-s,-s,
-										 -s, -s,  s, s,  s,  s, -s, -s, s,  s,  s,  s, -s, -s, -s,-s,  s,-s,-s, s,-s, s, s,-s,
-										  0,  0,  0, 0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0, 0,  0, 0, 0, 0, 0, 0, 0, 0 });
+				return Matrix<T>(4, 24, { x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x - s, x - s, x - s, x - s, x + s, x + s, x + s, x + s,
+										  y + s, y + s, y + s, y + s, y - s, y - s, y - s, y - s, y + s, y + s, y - s, y - s, y - s, y - s, y + s, y + s, y + s, y + s, y - s, y - s, y + s, y + s, y - s, y - s,
+										  z - s, z - s, z + s, z + s, z + s, z + s, z - s, z - s, z + s, z + s, z + s, z + s, z - s, z - s, z - s, z - s, z + s, z - s, z - s, z + s, z - s, z + s, z + s, z - s,
+										  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });
 
 			case bullet:
 				return Matrix<T>();

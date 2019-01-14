@@ -15,6 +15,7 @@ namespace game
 	{
 		object_matrix_ = rotate(object_matrix_, { dive(), turn(), roll() });
 		graphics_.draw_matrix(object_matrix_, color_);
+		reset();
 	}
 }
 

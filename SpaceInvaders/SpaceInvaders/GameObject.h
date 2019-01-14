@@ -23,6 +23,13 @@ namespace game
 		void decrease_dive(const float dive) noexcept { dive_value_ -= dive; }
 		float dive() const noexcept { return dive_value_; }
 
+		void reset()
+		{
+			dive_value_ = 0.0f;
+			roll_value_ = 0.0f;
+			turn_value_ = 0.0f;
+		}
+
 	protected:
 		Matrix<T> object_matrix_;
 		Vector3D<T> origin_;

@@ -17,12 +17,10 @@ namespace graphics
 	{
 	public:
 
-		GraphicsFacade(int width, int height, int spacing);
+		GraphicsFacade(int width, int height);
 		~GraphicsFacade();
 
 		void draw_vector(Vector2D<float> vector, Color color) const;
-		void draw_outline(const std::vector<std::unique_ptr<Vector2D<float>>> &vectors, Color color) const;
-		void draw_rectangle(SDL_Rect &rectangle, Color color) const;
 		void draw_line(Vector2D<float> &start, Vector2D<float> &end, Color color) const;
 		void clear() const;
 
@@ -51,15 +49,15 @@ namespace graphics
 					end.y = matrix.at(1, i + 1);
 				}
 
-				start = Vector2D<T>(width_ / 2.0f, height_ / 2.0f) + start;
-				end = Vector2D<T>(width_ / 2.0f, height_ / 2.0f) + end;
+				start += Vector2D<T>(width_ / 2.0f, height_ / 2.0f);
+				end += Vector2D<T>(width_ / 2.0f, height_ / 2.0f);
 
 				draw_line(start, end, color);
 			}
 		}
 
 	private:
-		int width_, height_, spacing_;
+		int width_, height_;
 		SDL_Window *main_window_;
 		SDL_Renderer *renderer_;
 
