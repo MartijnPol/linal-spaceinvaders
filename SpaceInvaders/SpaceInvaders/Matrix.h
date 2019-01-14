@@ -187,36 +187,26 @@ namespace math
 #pragma region Rotations in 3D
 
 	template<class T>
+	Matrix<T> scale(Vector3D<T> &vector)
+	{
+		return Matrix<T>(4, 4, { vector.x, 0, 0, 0,
+								 0, vector.y, 0, 0,
+								 0, 0, vector.z, 0,
+								 0, 0, 0, 1 });
+	}
+
+	template<class T>
 	Matrix<T> scale(Matrix<T> &matrix, Vector3D<T> &vector)
 	{
-		auto scale_matrix = Matrix<T>(4, 4, { vector.x, 0, 0, 0,
-											  0, vector.y, 0, 0,
-											  0, 0, vector.z, 0,
-											  0, 0, 0, 1 });
+		auto scale_matrix = scale(vector);
 
-		return scale_matrix * matrix;
-	}
+		translate(matrix, -vector.x, -vector.y, -vector.z);
 
-	template<class T>
-	Matrix<T> translate(Matrix<T> &matrix, T x, T y, T z)
-	{
-		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, x,
-													0, 1, 0, y,
-													0, 0, 1, z,
-													0, 0, 0, 1 });
+		scale_matrix = scale_matrix * matrix;
 
-		return translation_matrix * matrix;
-	}
+		translate(matrix, vector.x, vector.y, vector.z);
 
-	template<class T>
-	Matrix<T> translate(Matrix<T> &matrix, Vector3D<T> &vector)
-	{
-		auto translation_matrix = Matrix<T>(4, 4, { 1, 0, 0, vector.x,
-													0, 1, 0, vector.y,
-													0, 0, 1, vector.z,
-													0, 0, 0, 1 });
-
-		return translation_matrix * matrix;
+		return scale_matrix;
 	}
 
 	template<class T>
@@ -225,6 +215,23 @@ namespace math
 								 0, 1, 0, vector.y,
 								 0, 0, 1, vector.z,
 								 0, 0, 0, 1 });
+	}
+
+	template<class T>
+	Matrix<T> translate(Matrix<T> &matrix, T x, T y, T z)
+	{
+		auto translation_vector = Vector3D<T>{ x, y, z };
+		return translate(matrix, translation_vector);
+	}
+
+	template<class T>
+	Matrix<T> translate(Matrix<T> &matrix, Vector3D<T> &vector)
+	{
+		Matrix<T> translated_matrix = translate(vector);
+
+		translated_matrix = translated_matrix * matrix;
+
+		return translated_matrix;
 	}
 
 	template<class T>
