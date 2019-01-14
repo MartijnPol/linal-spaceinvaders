@@ -8,6 +8,8 @@ namespace math
 	{
 		T x, y, z;
 
+		Vector3D() {}
+
 		Vector3D(const T x, const T y, const T z)
 			: x(x), y(y), z(z) {}
 
@@ -55,7 +57,7 @@ namespace math
 
 		Vector3D<T> cross_product(const Vector3D<T> &other) const
 		{
-			auto cross_vector = Vector3D<T>({ x, y }, 0, 0, 0);
+			auto cross_vector = Vector3D<T>{ 0, 0, 0 };
 
 			cross_vector.x = (y * other.z - z * other.y);
 			cross_vector.y = (z * other.x - x * other.z);

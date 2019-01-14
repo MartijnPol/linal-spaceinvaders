@@ -17,7 +17,6 @@ namespace game
 		const auto rotation_matrix = rotate(rotation_vector);
 		auto result = rotation_matrix * object_matrix_;
 		graphics_.draw_matrix(result, color_);
-		reset();
 	}
 }
 

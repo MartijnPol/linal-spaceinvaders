@@ -138,6 +138,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsFacade.h" />
+    <ClInclude Include="Line3D.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="ShapeFactory.h" />

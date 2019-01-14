@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	auto graphics = GraphicsFacade{ width, height };
 
 	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f} };
-	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
+	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{30.0f, 50.0f, 0.0f}, true };
 
 	auto speed = 20.0f;
 

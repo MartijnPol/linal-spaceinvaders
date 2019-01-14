@@ -51,6 +51,23 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
+	void GraphicsFacade::draw_line(Vector3D<float>& start, Vector3D<float>& end, const Color color) const
+	{
+		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
+
+		start += Vector3D<float>(width_ / 2.0f, height_ / 2.0f, 0.0f);
+		end += Vector3D<float>(width_ / 2.0f, height_ / 2.0f, 0.0f);
+
+		const auto starting_x = start.x;
+		const auto starting_y = start.y;
+
+		const auto end_x = end.x;
+		const auto end_y = end.y;
+
+		SDL_RenderDrawLine(renderer_, starting_x, starting_y, end_x, end_y);
+		SDL_RenderPresent(renderer_);
+	}
+
 	void GraphicsFacade::draw_axes() const
 	{
 		SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 100);
@@ -66,6 +83,6 @@ namespace graphics
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 		SDL_RenderClear(renderer_);
 
-		draw_axes();
+		//draw_axes();
 	}
 }

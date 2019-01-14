@@ -30,6 +30,96 @@ namespace math
 			return inner[row * columns + column];
 		}
 
+		float min_x()
+		{
+			auto min = std::numeric_limits<float>::max();
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(0, i);
+				if (x < min)
+				{
+					min = x;
+				}
+			}
+
+			return min;
+		}
+
+		float max_x()
+		{
+			auto max = 0.0f;
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(0, i);
+				if (x > max)
+				{
+					max = x;
+				}
+			}
+
+			return max;
+		}
+
+		float min_y()
+		{
+			auto min = std::numeric_limits<float>::max();
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(1, i);
+				if (x < min)
+				{
+					min = x;
+				}
+			}
+
+			return min;
+		}
+
+		float max_y()
+		{
+			auto max = 0.0f;
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(1, i);
+				if (x > max)
+				{
+					max = x;
+				}
+			}
+
+			return max;
+		}
+
+		float min_z()
+		{
+			auto min = std::numeric_limits<float>::max();
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(2, i);
+				if (x < min)
+				{
+					min = x;
+				}
+			}
+
+			return min;
+		}
+
+		float max_z()
+		{
+			auto max = 0.0f;
+			for (auto i = 0; i < columns; ++i)
+			{
+				const auto x = at(2, i);
+				if (x > max)
+				{
+					max = x;
+				}
+			}
+
+			return max;
+		}
+
 		float at(const int row, const int column) { return inner[row * columns + column]; }
 		float at(const int row, const int column) const { return inner[row * columns + column]; }
 		void set(const int row, const int column, const float value) { inner[row * columns + column] = value; }
