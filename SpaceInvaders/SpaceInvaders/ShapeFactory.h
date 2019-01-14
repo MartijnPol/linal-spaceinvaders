@@ -1,9 +1,9 @@
-#ifndef UTILS_SHAPE_FACTORY_H
-#define UTILS_SHAPE_FACTORY_H
+#ifndef GAME_UTILS_SHAPE_FACTORY_H
+#define GAME_UTILS_SHAPE_FACTORY_H
 
 #include <vector>
-#include "Point.h"
 #include "Vector2D.h"
+#include "Matrix.h"
 
 using namespace math;
 
@@ -12,39 +12,36 @@ namespace utils
 	class ShapeFactory
 	{
 	public:
-		enum shape { triangle, rectangle, rocket };
+		enum shape { spaceship, target, bullet };
 
 		ShapeFactory() = default;
 		~ShapeFactory() = default;
 
-		static std::vector<std::unique_ptr<Vector2D>> get_shape(const Point origin, const shape shape)
+		template <typename T>
+		static Matrix<T> get_shape(const shape shape)
 		{
-			std::vector<std::unique_ptr<Vector2D>> vectors;
+			const auto s = 2.5f;
 
 			switch (shape)
 			{
-			case triangle:
-				vectors.push_back(std::make_unique<Vector2D>(origin, -4, 0));
-				vectors.push_back(std::make_unique<Vector2D>(origin, -2, 4));
-				vectors.push_back(std::make_unique<Vector2D>(Point{ origin.x - 4, origin.y }, 2, 4));
-				break;
+			case spaceship:
+				return Matrix<T>(4, 10, { 0.0f, 0.0f, 5.0f, 3.0f, 0.0f, 3.0f, 5.0f, 0.0f, 5.0f, 3.0f,
+										  5.0f, 0.0f, 0.0f, 3.0f, 0.0f, 3.0f, 0.0f, 5.0f, 0.0f, 3.0f,
+										  0.0f, 5.0f, 0.0f, 3.0f, 5.0f, 3.0f, 0.0f, 0.0f, 0.0f, 3.0f,
+										  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });
 
-			case rectangle:
-				vectors.push_back(std::make_unique<Vector2D>(Point(1, 1), 0, 1));
-				vectors.push_back(std::make_unique<Vector2D>(Point(1, 2), 1.5f, 0));
-				vectors.push_back(std::make_unique<Vector2D>(Point(2.5f, 2), 0, -1));
-				vectors.push_back(std::make_unique<Vector2D>(Point(2.5f, 1), -1.5f, 0));
-				break;
+			case target:
+				return Matrix<T>(4, 24, { s, -s, -s, s,  s, -s, -s,  s, s, -s, -s,  s,  s, -s, -s, s, -s,-s,-s,-s, s, s, s, s,
+										  s,  s,  s, s, -s, -s, -s, -s, s,  s, -s, -s, -s, -s,  s, s,  s, s,-s,-s, s, s,-s,-s,
+										 -s, -s,  s, s,  s,  s, -s, -s, s,  s,  s,  s, -s, -s, -s,-s,  s,-s,-s, s,-s, s, s,-s,
+										  0,  0,  0, 0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0,  0, 0,  0, 0, 0, 0, 0, 0, 0, 0 });
 
-			case rocket:
-				vectors.push_back(std::make_unique<Vector2D>(origin, -6, 0));
-				vectors.push_back(std::make_unique<Vector2D>(origin, -2, 6));
-				vectors.push_back(std::make_unique<Vector2D>(Point{ origin.x - 6, origin.y }, 2, 6));
+			case bullet:
+				return Matrix<T>();
 
-			default:;
+			default:
+				return Matrix<T>();
 			}
-
-			return vectors;
 		}
 	};
 }

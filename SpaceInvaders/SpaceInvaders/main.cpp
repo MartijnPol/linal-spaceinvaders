@@ -21,8 +21,8 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto space_ship = game::SpaceShip{ graphics, GraphicsFacade::preset_color::white };
-	auto cube = game::Cube{ graphics, GraphicsFacade::preset_color::red };
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE };
+	auto cube = game::Cube{ graphics, colors::RED };
 
 	//auto x = 10.0f;
 	//auto y = -10.0f;
@@ -53,8 +53,8 @@ int main(int argc, char * argv[])
 		{
 			graphics.clear();
 
-			//space_ship.update();
-			cube.update();
+			space_ship.update();
+			//cube.update();
 
 			////Vector3D<float> scale_vector({ 2, 2 }, scale_factor, scale_factor, scale_factor);
 
@@ -70,7 +70,6 @@ int main(int argc, char * argv[])
 			graphics.draw_matrix(scaled_target, GraphicsFacade::preset_color::red);*/
 
 			SDL_PollEvent(&event);
-
 			if (event.type == SDL_QUIT)
 			{
 				is_running = false;

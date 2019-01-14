@@ -1,42 +1,33 @@
-#ifndef GRAPHICS_GRAPHICS_FACADE_H
-#define GRAPHICS_GRAPHICS_FACADE_H
+#ifndef GAME_GRAPHICS_GRAPHICS_FACADE_H
+#define GAME_GRAPHICS_GRAPHICS_FACADE_H
 
 #include <SDL.h>
 #include <vector>
 #include "Matrix.h"
 #include "Vector2D.h"
+#include "Color.h"
 
 using namespace math;
 
 namespace graphics
 {
-	struct Color
-	{
-		int red;
-		int green;
-		int blue;
-
-		Color() = default;
-		Color(const int r, const int g, const int b) : red(r), green(g), blue(b) { }
-	};
+	struct Color;
 
 	class GraphicsFacade
 	{
 	public:
 
-		enum class preset_color { red, green, blue, white };
-
 		GraphicsFacade(int width, int height, int spacing);
 		~GraphicsFacade();
 
-		void draw_vector(Vector2D vector, preset_color preset_color) const;
-		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, const preset_color preset_color) const;
-		void draw_rectangle(SDL_Rect &rectangle, preset_color preset_color) const;
-		void draw_line(Point &start, Point &end, preset_color preset_color) const;
+		void draw_vector(Vector2D vector, Color color) const;
+		void draw_outline(const std::vector<std::unique_ptr<Vector2D>> &vectors, const Color color) const;
+		void draw_rectangle(SDL_Rect &rectangle, Color color) const;
+		void draw_line(Point &start, Point &end, Color color) const;
 		void clear() const;
 
 		template<typename T>
-		void draw_matrix(Matrix<T> &matrix, const preset_color preset_color) const
+		void draw_matrix(Matrix<T> &matrix, const Color color) const
 		{
 			for (auto i = 0; i < matrix.columns; ++i) {
 
@@ -61,7 +52,7 @@ namespace graphics
 				start = Point(width_ / 2.0f, height_ / 2.0f).add(start);
 				end = Point(width_ / 2.0f, height_ / 2.0f).add(end);
 
-				draw_line(start, end, preset_color);
+				draw_line(start, end, color);
 			}
 		}
 
@@ -69,7 +60,6 @@ namespace graphics
 		int width_, height_, spacing_;
 		SDL_Window *main_window_;
 		SDL_Renderer *renderer_;
-		Color preset_colors_[4] = { Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(255,255,255) };
 		
 		bool init();
 		void draw_text(std::string &message, Point &location) const;

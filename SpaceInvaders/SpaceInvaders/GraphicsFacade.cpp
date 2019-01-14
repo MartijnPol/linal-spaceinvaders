@@ -32,7 +32,7 @@ namespace graphics
 		std::cout << "DRAW_TEXT IS NOT IMPLEMENTED" << "\n";
 	}
 
-	void GraphicsFacade::draw_vector(const Vector2D vector, preset_color preset_color) const
+	void GraphicsFacade::draw_vector(const Vector2D vector, const Color color) const
 	{
 		auto center_of_system = Point(width_ / 2.0f, height_ / 2.0f);
 		const auto origin = center_of_system.add(vector.origin);
@@ -40,13 +40,12 @@ namespace graphics
 		const auto x = (origin.x + vector.x) * spacing_;
 		const auto y = (origin.y + vector.y) * spacing_;
 
-		const auto color = preset_colors_[static_cast<int>(preset_color)];
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 		SDL_RenderDrawLine(renderer_, origin.x * spacing_, origin.y * spacing_, x, y);
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D>>& vectors, const preset_color preset_color) const
+	void GraphicsFacade::draw_outline(const std::vector<std::unique_ptr<Vector2D>>& vectors, const Color color) const
 	{
 		// NOT WORKING
 		for (auto&& vector : vectors)
@@ -57,7 +56,6 @@ namespace graphics
 			const auto x = (origin.x + vector->x) * spacing_;
 			const auto y = (origin.y + vector->y) * spacing_;
 
-			const auto color = preset_colors_[static_cast<int>(preset_color)];
 			SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 			SDL_RenderDrawLine(renderer_, origin.x * spacing_, origin.y * spacing_, x, y);
 
@@ -65,7 +63,7 @@ namespace graphics
 		}
 	}
 
-	void GraphicsFacade::draw_rectangle(SDL_Rect &rectangle, preset_color preset_color) const
+	void GraphicsFacade::draw_rectangle(SDL_Rect &rectangle, const Color color) const
 	{
 		auto new_rectangle = SDL_Rect{ rectangle.x, rectangle.y, rectangle.w, rectangle.h };
 
@@ -75,15 +73,13 @@ namespace graphics
 		new_rectangle.x = origin.x * spacing_;
 		new_rectangle.y = origin.y * spacing_;
 
-		const auto color = preset_colors_[static_cast<int>(preset_color)];
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 		SDL_RenderDrawRect(renderer_, &new_rectangle);
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_line(Point& start, Point& end, preset_color preset_color) const
+	void GraphicsFacade::draw_line(Point& start, Point& end, const Color color) const
 	{
-		const auto color = preset_colors_[static_cast<int>(preset_color)];
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 
 		const auto starting_x = start.x * spacing_;

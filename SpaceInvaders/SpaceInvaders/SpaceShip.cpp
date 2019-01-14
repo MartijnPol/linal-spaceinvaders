@@ -1,13 +1,13 @@
 #include "SpaceShip.h"
+#include "ShapeFactory.h"
+
+using namespace utils;
 
 namespace game
 {
-	SpaceShip::SpaceShip(graphics::GraphicsFacade & graphics_facade, const graphics::GraphicsFacade::preset_color color) : graphics_(graphics_facade), color_(color)
+	SpaceShip::SpaceShip(graphics::GraphicsFacade & graphics_facade, const graphics::Color color) : graphics_(graphics_facade), color_(color)
 	{
-		object_matrix_ = Matrix<float>(4, 10, { 0.0f, 0.0f, 5.0f, 3.0f, 0.0f, 3.0f, 5.0f, 0.0f, 5.0f, 3.0f,
-												5.0f, 0.0f, 0.0f, 3.0f, 0.0f, 3.0f, 0.0f, 5.0f, 0.0f, 3.0f,
-												0.0f, 5.0f, 0.0f, 3.0f, 5.0f, 3.0f, 0.0f, 0.0f, 0.0f, 3.0f,
-												0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f });
+		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::spaceship);
 	}
 
 	void SpaceShip::update()

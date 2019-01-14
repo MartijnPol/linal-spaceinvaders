@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\graphics">
-      <UniqueIdentifier>{48689d29-067a-4b1c-8832-289da9dc4f6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{803edfa5-39bb-4ca8-b9fc-a46329a2211a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{38e08922-eae2-4806-bf76-65d7e0f0fdc5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\graphics">
       <UniqueIdentifier>{0e99467d-011c-4ed9-a25a-dd8d3f85dfa1}</UniqueIdentifier>
@@ -36,6 +30,12 @@
     </Filter>
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{50d0f061-a389-4a56-8f15-1f256f34da0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\graphics">
+      <UniqueIdentifier>{48689d29-067a-4b1c-8832-289da9dc4f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\utils">
+      <UniqueIdentifier>{38e08922-eae2-4806-bf76-65d7e0f0fdc5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsFacade.h">
-      <Filter>Header Files\graphics</Filter>
+      <Filter>Header Files\game\graphics</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files\math</Filter>
@@ -75,10 +75,10 @@
       <Filter>Header Files\math</Filter>
     </ClInclude>
     <ClInclude Include="ShapeFactory.h">
-      <Filter>Header Files\utils</Filter>
+      <Filter>Header Files\game\utils</Filter>
     </ClInclude>
     <ClInclude Include="TimerFacade.h">
-      <Filter>Header Files\utils</Filter>
+      <Filter>Header Files\game\utils</Filter>
     </ClInclude>
     <ClInclude Include="Vector3D.h">
       <Filter>Header Files\math</Filter>
@@ -91,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\game\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

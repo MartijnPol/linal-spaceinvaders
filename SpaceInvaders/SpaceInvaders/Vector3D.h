@@ -69,7 +69,7 @@ namespace math
 	};
 
 	template <typename T>
-	inline std::ostream& operator << (std::ostream &stream, const Vector3D<T> &vector)
+	std::ostream& operator << (std::ostream &stream, const Vector3D<T> &vector)
 	{
 		return stream << "Vector -> (X: " << vector.x << ", Y: " << vector.y << ", Z: " << vector.z << ")";
 	}

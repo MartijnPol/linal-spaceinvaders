@@ -25,11 +25,9 @@ namespace game
 
 	protected:
 		Matrix<T> object_matrix_;
-
 		float turn_value_{};
 		float roll_value_{};
 		float dive_value_{};
-
 	};
 }
 

@@ -1,5 +1,5 @@
-﻿#ifndef UTILS_TIMER_FACADE_H
-#define UTILS_TIMER_FACADE_H
+﻿#ifndef GAME_UTILS_TIMER_FACADE_H
+#define GAME_UTILS_TIMER_FACADE_H
 
 namespace utils
 {
