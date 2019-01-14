@@ -13,10 +13,12 @@ namespace game
 
 	void Cube::update()
 	{
-		const auto rotation_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
+		auto rotation_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
 
 		const auto t1 = atan2(rotation_vector.z, rotation_vector.x);
 		const auto t2 = atan2(rotation_vector.y, sqrt(pow(rotation_vector.x, 2) + pow(rotation_vector.z, 2)));
+
+		auto back_matrix = translate(origin_);
 
 		auto m1 = rotate_y(t1);
 		auto m2 = rotate_z(t2);
@@ -24,7 +26,12 @@ namespace game
 		auto m4 = rotate_z_negative(t2);
 		auto m5 = rotate_y_negative(t2);
 
-		auto rotate_result = m5 * m4 * m3 * m2 * m1 * object_matrix_;
+		auto to_origin_vector = Vector3D<float>{ 0 - origin_.x, 0 - origin_.y, 0 - origin_.z };
+		auto to_origin_matrix = translate(to_origin_vector);
+
+		auto complete_matrix = to_origin_matrix * m1 * m2 * m3 * m4 * m5 * back_matrix;
+
+		auto rotate_result = complete_matrix * object_matrix_;
 
 		//object_matrix_ = rotate(result, { 2.0f, 2.0f, 0.0f });
 
@@ -34,7 +41,7 @@ namespace game
 			const auto height = graphics_.height();
 
 			pulse();
-			degrees_ += 0.1f;
+			degrees_ += 0.10f;
 
 			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, scale_factor_ };
 			const auto scale_matrix = scale(scale_vector);
