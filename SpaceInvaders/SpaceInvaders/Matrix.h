@@ -265,6 +265,25 @@ namespace math
 	}
 
 	template<class T>
+	Matrix<T> rotate_z_negative(T radian)
+	{
+		return Matrix<T>(4, 4, { cos(radian), 0, -sin(radian), 0,
+								 0, 1, 0, 0,
+								 sin(radian), 0, cos(radian), 0,
+								 0, 0, 0, 1 });
+
+	}
+
+	template<class T>
+	Matrix<T> rotate_y_negative(T radian)
+	{
+		return Matrix<T>(4, 4, { cos(radian), sin(radian), 0, 0,
+								 -sin(radian), cos(radian), 0, 0,
+								 0, 0, 1, 0,
+								 0, 0, 0, 1 });
+	}
+
+	template<class T>
 	Matrix<T> rotate(Vector3D<T> vector) {
 		auto x_radius = Math::degrees_to_radius(vector.x);
 		auto y_radius = Math::degrees_to_radius(vector.y);

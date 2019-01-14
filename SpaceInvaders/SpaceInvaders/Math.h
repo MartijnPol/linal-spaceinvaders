@@ -13,6 +13,11 @@ namespace math
 		{
 			return degrees * (PI / 180.0f);
 		}
+
+		static float radius_to_degrees(const float radius)
+		{
+			return radius / (PI / 180.0f);
+		}
 	};
 }
 

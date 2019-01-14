@@ -16,14 +16,8 @@
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{803edfa5-39bb-4ca8-b9fc-a46329a2211a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\graphics">
-      <UniqueIdentifier>{0e99467d-011c-4ed9-a25a-dd8d3f85dfa1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{8a875f0f-b246-4008-8924-bb7cb209f13a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{17008ef6-b77e-4945-a83e-1b548ec7be8e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\game">
       <UniqueIdentifier>{963bb962-e55d-41d2-b5c2-7cebe5ac5cf9}</UniqueIdentifier>
@@ -37,16 +31,22 @@
     <Filter Include="Header Files\game\utils">
       <UniqueIdentifier>{38e08922-eae2-4806-bf76-65d7e0f0fdc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\graphics">
+      <UniqueIdentifier>{0e99467d-011c-4ed9-a25a-dd8d3f85dfa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\utils">
+      <UniqueIdentifier>{17008ef6-b77e-4945-a83e-1b548ec7be8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsFacade.cpp">
-      <Filter>Source Files\graphics</Filter>
+      <Filter>Source Files\game\graphics</Filter>
     </ClCompile>
     <ClCompile Include="TimerFacade.cpp">
-      <Filter>Source Files\utils</Filter>
+      <Filter>Source Files\game\utils</Filter>
     </ClCompile>
     <ClCompile Include="SpaceShip.cpp">
       <Filter>Source Files\game</Filter>

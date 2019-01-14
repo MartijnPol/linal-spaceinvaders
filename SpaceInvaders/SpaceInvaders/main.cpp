@@ -29,7 +29,7 @@ int main(int argc, char * argv[])
 	while (is_running)
 	{
 		timer.update();
-		if (timer.delta_time() >= 0.1f / 60.0f)
+		if (timer.delta_time() >= 1.0f / 60.0f)
 		{
 			graphics.clear();
 			//space_ship.update();

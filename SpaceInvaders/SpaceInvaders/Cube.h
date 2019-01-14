@@ -21,6 +21,7 @@ namespace game
 		float scale_factor_{ 1.0f };
 		bool reversed_{ false };
 		float pulse_speed_{ 0.03f };
+		float degrees_{ 0.1f };
 
 		void pulse();
 	};
