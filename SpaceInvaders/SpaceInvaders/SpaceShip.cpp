@@ -8,7 +8,7 @@ namespace game
 	SpaceShip::SpaceShip(graphics::GraphicsFacade & graphics_facade, const graphics::Color color, const Vector3D<float> origin)
 		: GameObject<float>(origin), graphics_(graphics_facade), color_(color)
 	{
-		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::spaceship);
+		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::spaceship, origin);
 	}
 
 	void SpaceShip::update()

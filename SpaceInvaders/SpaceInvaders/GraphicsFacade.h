@@ -34,14 +34,16 @@ namespace graphics
 				Vector2D<T> start{ 0.0f, 0.0f };
 				Vector2D<T> end{ 0.0f, 0.0f };
 
-				if (i == matrix.columns - 1) {
+				if (i == matrix.columns - 1) 
+				{
 					start.x = matrix.at(0, i);
 					start.y = matrix.at(1, i);
 
 					end.x = matrix.at(0, 0);
 					end.y = matrix.at(1, 0);
 				}
-				else {
+				else 
+				{
 					start.x = matrix.at(0, i);
 					start.y = matrix.at(1, i);
 

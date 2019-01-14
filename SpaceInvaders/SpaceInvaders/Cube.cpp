@@ -9,7 +9,7 @@ namespace game
 	Cube::Cube(graphics::GraphicsFacade & graphics_facade, const graphics::Color color, const Vector3D<float> origin, const bool is_target)
 		: GameObject<float>(origin), graphics_(graphics_facade), color_(color), is_target_(is_target)
 	{
-		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::cube);
+		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::cube, origin);
 	}
 
 	void Cube::update()

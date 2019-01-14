@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width,height,spacing };
 
-	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f,0.0f, 0.0f} };
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{5.0f,5.0f, -25.0f} };
 	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
 	auto speed = 0.1f;
@@ -34,7 +34,7 @@ int main(int argc, char * argv[])
 		{
 			graphics.clear();
 
-			//space_ship.update();
+			space_ship.update();
 			target.update();
 
 			SDL_PollEvent(&event);
