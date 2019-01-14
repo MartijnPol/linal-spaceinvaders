@@ -13,8 +13,10 @@ namespace game
 
 	void SpaceShip::update()
 	{
-		object_matrix_ = rotate(object_matrix_, { dive(), turn(), roll() });
-		graphics_.draw_matrix(object_matrix_, color_);
+		const auto rotation_vector = Vector3D<float>{ dive(), turn(), roll() };
+		const auto rotation_matrix = rotate(rotation_vector);
+		auto result = rotation_matrix * object_matrix_;
+		graphics_.draw_matrix(result, color_);
 		reset();
 	}
 }

@@ -1,6 +1,5 @@
 ﻿#include "Cube.h"
 #include "ShapeFactory.h"
-#include <iostream>
 
 using namespace utils;
 
@@ -14,15 +13,19 @@ namespace game
 
 	void Cube::update()
 	{
-		object_matrix_ = rotate(object_matrix_, { turn(), dive(), roll() });
+		object_matrix_ = rotate(object_matrix_, { 2.0f, 2.0f, 0.0f });
 
 		if (is_target_)
 		{
+			const auto width = graphics_.width();
+			const auto height = graphics_.height();
+
 			pulse();
-			Vector3D<float> scale_vector(scale_factor_, scale_factor_, scale_factor_);
-			std::cout << scale_factor_ << "\n";
-			auto scaled_target = scale(object_matrix_, scale_vector);
-			graphics_.draw_matrix(scaled_target, graphics::colors::RED);
+
+			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, scale_factor_ };
+			const auto scale_matrix = scale(scale_vector);
+			auto result = scale_matrix * object_matrix_;
+			graphics_.draw_matrix(result, graphics::colors::RED);
 		}
 		else
 		{
