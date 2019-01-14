@@ -12,7 +12,7 @@ namespace game
 
 	void SpaceShip::update()
 	{
-		object_matrix_ = rotate(object_matrix_, { {0,0}, turn(), dive(), roll() });
+		object_matrix_ = rotate(object_matrix_, { {0,0}, dive(), turn(), roll() });
 		graphics_.draw_matrix(object_matrix_, color_);
 	}
 }

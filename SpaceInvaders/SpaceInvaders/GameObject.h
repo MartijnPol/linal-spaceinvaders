@@ -15,8 +15,8 @@ namespace game
 		void decrease_turn(const float turn) noexcept { turn_value_ -= turn; }
 		float turn() const noexcept { return turn_value_; }
 
-		void increase_roll(const float roll) noexcept { roll_value_ += roll; }
-		void decrease_roll(const float roll) noexcept { roll_value_ -= roll; }
+		void increase_roll(const float roll) noexcept { roll_value_ -= roll; }
+		void decrease_roll(const float roll) noexcept { roll_value_ += roll; }
 		float roll() const noexcept { return roll_value_; }
 
 		void increase_dive(const float dive) noexcept { dive_value_ += dive; }
