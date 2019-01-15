@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	auto graphics = GraphicsFacade{ width, height };
 
 	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-100.0f, -100.0f, 0.0f} };
-	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
+	auto target = game::Cube{ graphics, colors::WHITE, Vector3D<float>{-100.0f, -100.0f, 0.0f}, true };
 
 	auto speed = 10.0f;
 
@@ -75,6 +75,19 @@ int main(int argc, char * argv[])
 
 				case SDLK_RSHIFT:
 					space_ship.decrease_move(speed);
+					break;
+
+				case SDLK_1:
+					break;
+
+				case SDLK_2:
+					break;
+
+				case SDLK_3:
+					break;
+
+				case SDLK_h:
+					target.switch_help_line();
 					break;
 
 				default:

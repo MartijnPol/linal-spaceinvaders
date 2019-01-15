@@ -27,6 +27,11 @@ namespace game
 		void decrease_move(const float move) noexcept { move_value_ -= move; }
 		float move() const noexcept { return move_value_; }
 
+		void switch_help_line()
+		{
+			help_line_ = !help_line_;
+		}
+
 		void reset()
 		{
 			move_value_ = 0.0f;
@@ -42,6 +47,7 @@ namespace game
 		float roll_value_{};
 		float dive_value_{};
 		float move_value_{};
+		bool help_line_{};
 	};
 }
 

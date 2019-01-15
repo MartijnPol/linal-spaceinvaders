@@ -16,40 +16,29 @@ namespace utils
 		~ShapeFactory() = default;
 
 		template <typename T>
-		static Matrix<T> get_shape(const shape shape, Vector3D<T> origin)
+		static Matrix<T> get_shape(const shape shape)
 		{
-			const auto s = 25.0f;
-
-			const auto w = 35.0f;
-			const auto h = 60.0f;
-
-			auto x = origin.x;
-			auto y = origin.y;
-			auto z = origin.z;
-
 			switch (shape)
 			{
 			case spaceship:
-				return Matrix<T>(4, 10, { x, x, x + w, x + h, x, x + h, x + w, x, x + w, x + h,
-										  y + w, y, y, y + h, y, y + h, y, y + w, y, y + h,
-										  z, z + w, z, z + h, z + w, z + h, z, z, z, z + h,
+				return Matrix<T>(4, 10, { 0.0f, 0.0f, 50.0f, 30.0f, 0.0f, 30.0f, 50.0f, 0.0f, 50.0f, 30.0f,
+										  50.0f, 0.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 50.0f, 0.0f, 30.0f,
+										  0.0f, 50.0f, 0.0f, 30.0f, 50.0f, 30.0f, 0.0f, 0.0f, 0.0f, 30.0f,
 										  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f });
 
-			case cube:				//   A      B		C		 D	   E	  F       G		  H
+			case cube:			      
+									  // A      B	   C		 D	     E	   F       G	   H
 				return Matrix<T>(4, 8, { 0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,   0.0f,
 										 0.0f,   0.0f,   0.0f,   0.0f, 100.0f, 100.0f, 100.0f, 100.0f,
 										 0.0f,   0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,
-										 1.0f,   1.0f,   1.0f,   1.0f,   1.0f,  1.0f,    1.0f,   1.0f
-					});
+										 1.0f,   1.0f,   1.0f,   1.0f,   1.0f,  1.0f,    1.0f,   1.0f });
 
-							//return Matrix<T>(4, 24, { x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x - s, x - s, x - s, x - s, x + s, x + s, x + s, x + s,
-							//						  y + s, y + s, y + s, y + s, y - s, y - s, y - s, y - s, y + s, y + s, y - s, y - s, y - s, y - s, y + s, y + s, y + s, y + s, y - s, y - s, y + s, y + s, y - s, y - s,
-							//						  z - s, z - s, z + s, z + s, z + s, z + s, z - s, z - s, z + s, z + s, z + s, z + s, z - s, z - s, z - s, z - s, z + s, z - s, z - s, z + s, z - s, z + s, z + s, z - s,
-							//						  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f });
-			
 			case bullet:
-				return Matrix<T>();
-
+									  // A      B	   C	    D	    E	  F      G		 H
+				return Matrix<T>(4, 8, { 0.0f,  25.0f, 25.0f,   0.0f,   0.0f, 25.0f, 25.0f,  0.0f,
+										 0.0f,   0.0f,  0.0f,   0.0f,  25.0f, 25.0f, 25.0f, 25.0f,
+										 0.0f,   0.0f, 25.0f,  25.0f,   0.0f,  0.0f, 25.0f, 25.0f,
+										 1.0f,   1.0f,  1.0f,   1.0f,   1.0f,  1.0f,  1.0f,  1.0f });
 			default:
 				return Matrix<T>();
 			}

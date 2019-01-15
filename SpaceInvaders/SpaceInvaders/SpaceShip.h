@@ -16,6 +16,8 @@ namespace game
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
 		Vector3D<float> location_;
+		float degrees_{ 0.0f };
+
 	};
 }
 
