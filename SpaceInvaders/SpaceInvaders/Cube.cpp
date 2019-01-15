@@ -71,12 +71,15 @@ namespace game
 		if (is_target_)
 		{
 			pulse();
-			degrees_ += 0.01f;
+			degrees_ += 0.10f;
 
-			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, scale_factor_ };
+			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, 0.0f };
+
+			auto from = from_origin * step_seven;
 			const auto scale_matrix = scale(scale_vector);
-			auto result = scale_matrix * step_seven;
-			graphics_.draw_matrix(step_seven, color_);
+			auto result = scale_matrix * from;
+			result = to_origin * result;
+			graphics_.draw_matrix(result, color_);
 		}
 		else
 		{
