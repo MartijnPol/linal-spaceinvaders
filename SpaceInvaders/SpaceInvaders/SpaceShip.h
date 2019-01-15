@@ -15,6 +15,7 @@ namespace game
 	private:
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
+		Vector3D<float> location_;
 	};
 }
 

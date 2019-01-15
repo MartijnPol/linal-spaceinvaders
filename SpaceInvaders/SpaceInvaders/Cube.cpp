@@ -39,9 +39,9 @@ namespace game
 
 		auto result = ad.cross_product(hd);
 
-		auto const middle_point_x = (object_matrix_.max_x() + object_matrix_.min_x()) / 2;
-		auto const middle_point_y = (object_matrix_.max_y() + object_matrix_.min_y()) / 2;
-		auto const middle_point_z = (object_matrix_.max_z() + object_matrix_.min_z()) / 2;
+		auto const middle_point_x = (object_matrix_.max(0) + object_matrix_.min(0)) / 2;
+		auto const middle_point_y = (object_matrix_.max(1) + object_matrix_.min(1)) / 2;
+		auto const middle_point_z = (object_matrix_.max(2) + object_matrix_.min(2)) / 2;
 
 		auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
 		auto translated = result.translate(middle_vector);
@@ -59,10 +59,10 @@ namespace game
 		auto m4 = rotate_z_negative(t2);
 		auto m5 = rotate_y_negative(t2);
 
-		auto to_origin_vector = Vector3D<float>{ 0 - origin_.x, 0 - origin_.y, 0 - origin_.z };
-		auto to_origin_matrix = translate(to_origin_vector);
+		auto to_origin_matrix = translate(Vector3D<float>{-translated.start.x, -translated.start.y, -translated.start.z});
 
-		auto complete_matrix = to_origin_matrix * m1 * m2 * m3 * m4 * m5 * back_matrix;
+		//auto complete_matrix = to_origin_matrix * m1 * m2 * m3 * m4 * m5 * back_matrix;
+		auto complete_matrix = back_matrix * m1 * m2 * m3 * m4 * m5 * to_origin_matrix;
 
 		auto rotate_result = complete_matrix * object_matrix_;
 
