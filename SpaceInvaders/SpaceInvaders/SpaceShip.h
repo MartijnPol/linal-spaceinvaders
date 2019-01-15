@@ -29,7 +29,7 @@ namespace game
 		float yaw_degrees{ 0.0f };
 
 	private:
-		float speed_{ 0.3f };
+		float speed_{ 0.5f };
 		std::unique_ptr<std::vector<Bullet>> bullets_;
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
