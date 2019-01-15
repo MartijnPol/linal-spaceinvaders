@@ -84,6 +84,10 @@ int main(int argc, char * argv[])
 					graphics.current_view(GraphicsFacade::side);
 					break;
 
+				case SDLK_LSHIFT:
+					space_ship.accelerate();
+					break;
+
 				case SDLK_SPACE:
 					space_ship.fire_bullet();
 					break;

@@ -19,8 +19,15 @@ namespace game
 		void rotate(Line3D line, float degrees)
 		{
 			draw_matrix_ = math::rotate(draw_matrix_, line, degrees);
-			heading_ = math::rotate(line, degrees) * heading_;
+			const auto vector = Vector3D<float>{ line.x(), line.y(), line.z() };
+			heading_ = math::rotate(vector) * heading_;
 		}
+
+		void accelerate()
+		{
+			draw_matrix_ = math::translate(draw_matrix_, heading_);
+		}
+
 
 	protected:
 		Matrix<T> original_matrix_;
