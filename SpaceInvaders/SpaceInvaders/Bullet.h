@@ -25,33 +25,18 @@ namespace game
 		{
 			draw_matrix_ = original_matrix_;
 
-			const auto a_x = original_matrix_.at(0, 0);
-			const auto a_y = original_matrix_.at(1, 0);
-			const auto a_z = original_matrix_.at(2, 0);
+			// Get points in shape
+			const auto a = original_matrix_.get_point_vector(0);
+			const auto d = original_matrix_.get_point_vector(3);
+			const auto h = original_matrix_.get_point_vector(7);
 
-			const auto d_x = original_matrix_.at(0, 3);
-			const auto d_y = original_matrix_.at(1, 3);
-			const auto d_z = original_matrix_.at(2, 3);
-
-			const auto a = Vector3D<float>{ a_x, a_y , a_z };
-			const auto d = Vector3D<float>{ d_x, d_y , d_z };
 			auto ad = Line3D{ a, d };
-
-			const auto h_x = original_matrix_.at(0, 7);
-			const auto h_y = original_matrix_.at(1, 7);
-			const auto h_z = original_matrix_.at(2, 7);
-
-			const auto h = Vector3D<float>{ h_x, h_y, h_z };
 			const auto hd = Line3D{ h, d };
 
 			auto result = ad.cross_product(hd);
 
-			auto const middle_point_x = (original_matrix_.max(0) + original_matrix_.min(0)) / 2;
-			auto const middle_point_y = (original_matrix_.max(1) + original_matrix_.min(1)) / 2;
-			auto const middle_point_z = (original_matrix_.max(2) + original_matrix_.min(2)) / 2;
-
-			const auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
-			auto translated = result.translate(middle_vector);
+			const auto middle_vector = original_matrix_.get_middle_vector();
+			const auto translated = result.translate(middle_vector);
 
 			speed_ += 1.0f;
 
