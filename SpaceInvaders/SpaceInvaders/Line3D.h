@@ -1,6 +1,8 @@
 ﻿#ifndef LINE_3D
 #define LINE_3D
 
+using namespace math;
+
 struct Line3D
 {
 	Line3D() = default;
@@ -35,5 +37,4 @@ struct Line3D
 		return std::sqrt(std::pow(x(), 2) + std::pow(y(), 2) + std::pow(z(), 2));
 	}
 };
-
 #endif

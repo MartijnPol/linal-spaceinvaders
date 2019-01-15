@@ -45,7 +45,7 @@ namespace game
 
 		const auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
 		const auto translated = result.translate(middle_vector);
-		rotate(translated);
+		handle(translated);
 	}
 
 	void Cube::roll()
@@ -79,7 +79,7 @@ namespace game
 
 		const auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
 		const auto translated = result.translate(middle_vector);
-		rotate(translated);
+		handle(translated);
 	}
 
 
@@ -114,46 +114,23 @@ namespace game
 
 		const auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
 		const auto translated = result.translate(middle_vector);
-		rotate(translated);
+		handle(translated);
 	}
 
-	void Cube::rotate(Line3D translated)
+	void Cube::handle(Line3D translated)
 	{
 		if (help_line_)
 		{
 			graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
 		}
 
+		rotate(translated);
+
 		const auto t1 = std::atan2(translated.z(), translated.x());
 		const auto t2 = std::acosf(std::sqrtf(pow(translated.x(), 2) + pow(translated.z(), 2)) / translated.length());
 
 		const auto to_origin = translate(translated.start);
 		const auto from_origin = translate(Vector3D<float>{-translated.start});
-
-		const auto m1 = rotate_y(t1);
-		const auto m2 = rotate_z(t2);
-		const auto m3 = rotate_x(degrees_);
-		const auto m4 = rotate_z(-t2);
-		const auto m5 = rotate_y(-t1);
-
-		auto step_one = from_origin * draw_matrix_;
-		//graphics_.draw_matrix(step_one, graphics::colors::RED);
-		auto step_two = m1 * step_one;
-		// graphics_.draw_matrix(step_two, graphics::colors::BLUE);
-
-		auto step_three = m2 * step_two;
-		// graphics_.draw_matrix(step_three, graphics::colors::WHITE);
-
-		auto step_four = m3 * step_three;
-		// graphics_.draw_matrix(step_four, graphics::colors::GREEN);
-
-		auto step_five = m4 * step_four;
-		// graphics_.draw_matrix(step_five, graphics::colors::GRAY);
-
-		auto step_six = m5 * step_five;
-		//graphics_.draw_matrix(step_six, graphics::colors::WHITE);
-
-		draw_matrix_ = to_origin * step_six;
 
 		if (is_target_)
 		{

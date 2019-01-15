@@ -15,16 +15,17 @@ namespace game
 		explicit SpaceShip(graphics::GraphicsFacade& graphics_facade, graphics::Color color, Vector3D<float> origin);
 		void update();
 		void fire_bullet();
+		void handle(Line3D translated);
 
 	private:
 		std::unique_ptr<std::vector<Bullet>> bullets_;
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
 
+
 		void roll();
 		void pitch();
 		void yaw();
-		void rotate(Line3D translated);
 	};
 }
 

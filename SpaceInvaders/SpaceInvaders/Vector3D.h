@@ -81,9 +81,9 @@ namespace math
 	{
 		auto inverted_vector = Vector3D<T>(0, 0, 0);
 
-		inverted_vector.x = - vector.x;
-		inverted_vector.y = - vector.y;
-		inverted_vector.z = - vector.z;
+		inverted_vector.x = -vector.x;
+		inverted_vector.y = -vector.y;
+		inverted_vector.z = -vector.z;
 
 		return inverted_vector;
 	}

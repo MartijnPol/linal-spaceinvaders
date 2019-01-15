@@ -40,6 +40,11 @@ namespace game
 			turn_value_ = 0.0f;
 		}
 
+		void rotate(Line3D line)
+		{
+			draw_matrix_ = math::rotate(draw_matrix_, line, degrees_);
+		}
+
 	protected:
 		Matrix<T> original_matrix_;
 		Matrix<T> draw_matrix_;

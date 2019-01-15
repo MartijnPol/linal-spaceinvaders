@@ -20,7 +20,7 @@ namespace game
 		void roll();
 		void pitch();
 		void yaw();
-		void rotate(Line3D translated);
+		void handle(Line3D translated);
 
 		bool is_target_{ false };
 		float max_scale_factor_{ 1.2f };

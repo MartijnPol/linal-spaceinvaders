@@ -153,7 +153,7 @@ public:
 		Assert::IsTrue(expected_result == result);
 	}
 
-	TEST_METHOD(matrix_3d_rotate_test)
+	/*TEST_METHOD(matrix_3d_rotate_test)
 	{
 		const auto rotation_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
 
@@ -165,5 +165,5 @@ public:
 																 0, 0, 0, 1 });
 
 		Assert::IsTrue(expected_result == result);
-	}
+	}*/
 };
