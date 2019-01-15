@@ -1,12 +1,13 @@
 #include "SpaceShip.h"
 #include "ShapeFactory.h"
 #include "Line3D.h"
+#include <iostream>
 
 using namespace utils;
 
 namespace game
 {
-	SpaceShip::SpaceShip(graphics::GraphicsFacade & graphics_facade, const graphics::Color color, Vector3D<float> origin)
+	SpaceShip::SpaceShip(graphics::GraphicsFacade &graphics_facade, const graphics::Color color, Vector3D<float> origin)
 		: GameObject<float>(origin), graphics_(graphics_facade), color_(color)
 	{
 		original_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::spaceship);

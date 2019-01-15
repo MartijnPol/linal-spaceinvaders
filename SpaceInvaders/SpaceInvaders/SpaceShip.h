@@ -31,7 +31,7 @@ namespace game
 	private:
 		float speed_{ 0.5f };
 		std::unique_ptr<std::vector<Bullet>> bullets_;
-		graphics::GraphicsFacade graphics_;
+		graphics::GraphicsFacade& graphics_;
 		graphics::Color color_;
 
 		void reset();
