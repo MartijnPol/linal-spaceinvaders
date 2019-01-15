@@ -175,6 +175,15 @@ namespace game
 		roll();
 
 		draw_matrix_ = translate(draw_matrix_, origin_);
+
+
+		if (is_target_)
+		{
+			pulse();
+			auto scale_vector = Vector3D<float>(scale_factor_, scale_factor_, scale_factor_);
+			draw_matrix_ = scale(draw_matrix_, scale_vector);
+		}
+
 		graphics_.draw_matrix(draw_matrix_, color_);
 	}
 

@@ -23,7 +23,7 @@ namespace game
 		void rotate(Line3D translated);
 
 		bool is_target_{ false };
-		float max_scale_factor_{ 1.5f };
+		float max_scale_factor_{ 1.2f };
 		float scale_factor_{ 1.0f };
 		bool reversed_{ false };
 		float pulse_speed_{ 0.03f };
