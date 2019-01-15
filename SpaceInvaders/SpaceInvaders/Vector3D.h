@@ -8,7 +8,7 @@ namespace math
 	{
 		T x, y, z;
 
-		Vector3D() {}
+		Vector3D() = default;
 
 		Vector3D(const T x, const T y, const T z)
 			: x(x), y(y), z(z) {}
@@ -87,6 +87,7 @@ namespace math
 
 		return inverted_vector;
 	}
+
 	template<class T>
 	bool operator==(const Vector3D<T>& left, const Vector3D<T>& right)
 	{

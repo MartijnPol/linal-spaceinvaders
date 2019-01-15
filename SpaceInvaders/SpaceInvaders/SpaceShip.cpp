@@ -91,6 +91,7 @@ namespace game
 		{
 			bullets_->erase(bullets_->begin());
 		}
+
 		for (auto& bullet : *bullets_)
 		{
 			bullet.update();
