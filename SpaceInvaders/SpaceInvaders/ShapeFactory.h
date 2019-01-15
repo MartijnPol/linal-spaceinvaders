@@ -28,10 +28,10 @@ namespace utils
 
 			case cube:			      
 									  // A      B	   C		 D	     E	   F       G	   H
-				return Matrix<T>(4, 8, { 0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,   0.0f,
+				return Matrix<T>(4, 8, { 0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f, 0.0f,
 										 0.0f,   0.0f,   0.0f,   0.0f, 100.0f, 100.0f, 100.0f, 100.0f,
 										 0.0f,   0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,
-										 1.0f,   1.0f,   1.0f,   1.0f,   1.0f,  1.0f,    1.0f,   1.0f });
+										 1.0f,   1.0f,   1.0f,   1.0f,   1.0f,  1.0f,    1.0f, 1.0f });
 
 			case bullet:
 									  // A      B	   C	    D	    E	  F      G		 H
