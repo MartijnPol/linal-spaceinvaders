@@ -134,7 +134,7 @@ namespace game
 		const auto m2 = rotate_z(t2);
 		const auto m3 = rotate_x(degrees_);
 		const auto m4 = rotate_z(-t2);
-		const auto m5 = rotate_y(-t2);
+		const auto m5 = rotate_y(-t1);
 
 		auto step_one = from_origin * draw_matrix_;
 		//graphics_.draw_matrix(step_one, graphics::colors::RED);
@@ -170,8 +170,9 @@ namespace game
 	void Cube::update()
 	{
 		draw_matrix_ = original_matrix_;
-		degrees_ += 0.2f;
+		degrees_ += 0.05f;
 
+		pitch();
 		roll();
 
 		draw_matrix_ = translate(draw_matrix_, origin_);

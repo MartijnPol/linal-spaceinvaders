@@ -25,7 +25,7 @@ namespace game
 		const auto b_x = original_matrix_.at(0, 1);
 		const auto b_y = original_matrix_.at(1, 1);
 		const auto b_z = original_matrix_.at(2, 1);
-		const auto b = Vector3D<float>{ b_x, b_y , b_z };
+		const auto b = Vector3D<float>{ b_x, b_y, b_z };
 
 		// C
 		const auto c_x = original_matrix_.at(0, 2);
@@ -61,16 +61,16 @@ namespace game
 		const auto b_z = original_matrix_.at(2, 1);
 		const auto b = Vector3D<float>{ b_x, b_y , b_z };
 
-		// F
-		const auto f_x = original_matrix_.at(0, 5);
-		const auto f_y = original_matrix_.at(1, 5);
-		const auto f_z = original_matrix_.at(2, 5);
-		const auto f = Vector3D<float>{ f_x, f_y, f_z };
+		// D
+		const auto d_x = original_matrix_.at(0, 3);
+		const auto d_y = original_matrix_.at(1, 3);
+		const auto d_z = original_matrix_.at(2, 3);
+		const auto d = Vector3D<float>{ d_x, d_y, d_z };
 
-		auto ab = Line3D{ a, b };
-		const auto bf = Line3D{ b, f };
+		auto ab = Line3D{ a, d };
+		const auto bd = Line3D{ b, d };
 
-		auto result = ab.cross_product(bf);
+		auto result = ab.cross_product(bd);
 
 		auto const middle_point_x = (original_matrix_.max(0) + original_matrix_.min(0)) / 2;
 		auto const middle_point_y = (original_matrix_.max(1) + original_matrix_.min(1)) / 2;
@@ -84,28 +84,28 @@ namespace game
 
 	void SpaceShip::pitch()
 	{
-		// A
-		const auto a_x = original_matrix_.at(0, 0);
-		const auto a_y = original_matrix_.at(1, 0);
-		const auto a_z = original_matrix_.at(2, 0);
+		// C
+		const auto a_x = original_matrix_.at(0, 2);
+		const auto a_y = original_matrix_.at(1, 2);
+		const auto a_z = original_matrix_.at(2, 2);
 		const auto a = Vector3D<float>{ a_x, a_y , a_z };
 
-		// B
-		const auto b_x = original_matrix_.at(0, 3);
-		const auto b_y = original_matrix_.at(1, 3);
-		const auto b_z = original_matrix_.at(2, 3);
-		const auto b = Vector3D<float>{ b_x, b_y , b_z };
+		// D
+		const auto d_x = original_matrix_.at(0, 3);
+		const auto d_y = original_matrix_.at(1, 3);
+		const auto d_z = original_matrix_.at(2, 3);
+		const auto d = Vector3D<float>{ d_x, d_y , d_z };
 
-		// C
-		const auto c_x = original_matrix_.at(0, 7);
-		const auto c_y = original_matrix_.at(1, 7);
-		const auto c_z = original_matrix_.at(2, 7);
-		const auto c = Vector3D<float>{ c_x, c_y, c_z };
+		// E
+		const auto h_x = original_matrix_.at(0, 4);
+		const auto h_y = original_matrix_.at(1, 4);
+		const auto h_z = original_matrix_.at(2, 4);
+		const auto h = Vector3D<float>{ h_x, h_y, h_z };
 
-		auto ab = Line3D{ a, b };
-		const auto bc = Line3D{ b, c };
+		auto ad = Line3D{ a, d };
+		const auto hd = Line3D{ h, d };
 
-		auto result = ab.cross_product(bc);
+		auto result = ad.cross_product(hd);
 
 		auto const middle_point_x = (original_matrix_.max(0) + original_matrix_.min(0)) / 2;
 		auto const middle_point_y = (original_matrix_.max(1) + original_matrix_.min(1)) / 2;
@@ -120,7 +120,7 @@ namespace game
 	{
 		if (help_line_)
 		{
-			graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
+			graphics_.draw_line(translated.start, translated.end, graphics::colors::RED);
 		}
 
 		const auto t1 = std::atan2(translated.z(), translated.x());
@@ -133,15 +133,15 @@ namespace game
 		const auto m2 = rotate_z(t2);
 		const auto m3 = rotate_x(degrees_);
 		const auto m4 = rotate_z(-t2);
-		const auto m5 = rotate_y(-t2);
+		const auto m5 = rotate_y(-t1);
 
 		auto step_one = from_origin * draw_matrix_;
 		//graphics_.draw_matrix(step_one, graphics::colors::RED);
 		auto step_two = m1 * step_one;
-		// graphics_.draw_matrix(step_two, graphics::colors::BLUE);
+		 //graphics_.draw_matrix(step_two, graphics::colors::BLUE);
 
 		auto step_three = m2 * step_two;
-		// graphics_.draw_matrix(step_three, graphics::colors::WHITE);
+		 //graphics_.draw_matrix(step_three, graphics::colors::WHITE);
 
 		auto step_four = m3 * step_three;
 		// graphics_.draw_matrix(step_four, graphics::colors::GREEN);
@@ -159,7 +159,8 @@ namespace game
 	void SpaceShip::update()
 	{
 		draw_matrix_ = original_matrix_;
-		degrees_ += 0.2f;
+		degrees_ += 0.05f;
+
 		yaw();
 
 		draw_matrix_ = translate(draw_matrix_, origin_);

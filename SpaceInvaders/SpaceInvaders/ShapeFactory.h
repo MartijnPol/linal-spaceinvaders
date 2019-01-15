@@ -21,11 +21,12 @@ namespace utils
 			switch (shape)
 			{
 			case spaceship:
-										// A    B	  C		 D	    E	  F      G	    H     I      J
-				return Matrix<T>(4, 10, { 0.0f, 0.0f, 50.0f, 30.0f, 0.0f, 30.0f, 50.0f, 0.0f, 50.0f, 30.0f,
-										  50.0f, 0.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 50.0f, 0.0f, 30.0f,
-										  0.0f, 50.0f, 0.0f, 30.0f, 50.0f, 30.0f, 0.0f, 0.0f, 0.0f, 30.0f,
-										  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f });
+
+										// A     B	    C	   D	  E	  
+				return Matrix<T>(4, 5, {   0.0f, 30.0f, 20.0f, 20.0f, 20.0f,
+										   0.0f,  0.0f,  0.0f, 30.0f,  0.0f,
+										   0.0f,  0.0f, 40.0f,  0.0f,  0.0f,
+										   1.0f,  1.0f,  1.0f,  1.0f,  1.0f });
 
 			case cube:			      
 									  // A      B	   C		D	    E	  F      G	     H
