@@ -65,6 +65,16 @@ namespace math
 
 			return cross_vector;
 		}
+
+		void normalize()
+		{
+			const auto vector_length = length();
+
+			x /= vector_length;
+			y /= vector_length;
+			z /= vector_length;
+		}
+
 	};
 }
 
