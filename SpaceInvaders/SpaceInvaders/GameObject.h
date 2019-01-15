@@ -41,7 +41,8 @@ namespace game
 		}
 
 	protected:
-		Matrix<T> object_matrix_;
+		Matrix<T> original_matrix_;
+		Matrix<T> draw_matrix_;
 		Vector3D<T> origin_;
 		float turn_value_{};
 		float roll_value_{};

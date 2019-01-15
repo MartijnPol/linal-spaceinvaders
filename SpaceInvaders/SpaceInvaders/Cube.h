@@ -3,6 +3,7 @@
 
 #include "GraphicsFacade.h"
 #include "GameObject.h"
+#include "Line3D.h"
 
 namespace game
 {
@@ -15,6 +16,11 @@ namespace game
 	private:
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
+
+		void roll();
+		void pitch();
+		void yaw();
+		void rotate(Line3D translated);
 
 		bool is_target_{ false };
 		float max_scale_factor_{ 1.5f };
