@@ -169,11 +169,9 @@ namespace math
 	}
 
 	template<class T>
-	Matrix<T> translate(Matrix<T> &matrix, T translate_x, T translate_y)
+	Matrix<T> translate(Matrix<T> &matrix, T x, T y)
 	{
-		auto translation_matrix = Matrix<T>(3, 3, { 1, 0, translate_x,
-													0, 1, translate_y,
-													0, 0, 1 });
+		auto translation_matrix = translate(x, y);
 
 		return translation_matrix * matrix;
 	}

@@ -24,7 +24,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DegreesToRadiusTest.cpp">
+    <ClInclude Include="MathTest.cpp">
       <Filter>Source Files\math</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,6 +33,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MatrixTest.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2DTest.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3DTest.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
