@@ -17,7 +17,6 @@ namespace game
 	private:
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
-		float degrees_{ 0.0f };
 
 		void roll();
 		void pitch();
