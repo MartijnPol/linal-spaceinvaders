@@ -61,6 +61,24 @@ namespace math
 			return max;
 		}
 
+		Vector3D<T> get_middle_vector()
+		{
+			const auto middle_x = (max(0) + min(0)) / 2;
+			const auto middle_y = (max(1) + min(1)) / 2;
+			const auto middle_z = (max(2) + min(2)) / 2;
+
+			return Vector3D<T>{middle_x, middle_y, middle_z};
+		}
+
+		Vector3D<T> get_point_vector(const int index)
+		{
+			const auto x = at(0, index);
+			const auto y = at(1, index);
+			const auto z = at(2, index);
+
+			return Vector3D<T>{x, y, z};
+		}
+
 		float at(const int row, const int column) { return inner[row * columns + column]; }
 		float at(const int row, const int column) const { return inner[row * columns + column]; }
 		void set(const int row, const int column, const float value) { inner[row * columns + column] = value; }
