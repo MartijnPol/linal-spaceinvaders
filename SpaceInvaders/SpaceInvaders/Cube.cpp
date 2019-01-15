@@ -71,7 +71,7 @@ namespace game
 			graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
 		}
 
-		rotate(translated);
+		rotate(translated, degrees_);
 
 		const auto t1 = std::atan2(translated.z(), translated.x());
 		const auto t2 = std::acosf(std::sqrtf(pow(translated.x(), 2) + pow(translated.z(), 2)) / translated.length());
