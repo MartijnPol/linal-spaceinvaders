@@ -74,8 +74,19 @@ namespace math
 			y /= vector_length;
 			z /= vector_length;
 		}
-
 	};
+
+	template <typename T>
+	Vector3D<T> operator -(const Vector3D<T> vector)
+	{
+		auto inverted_vector = Vector3D<T>(0, 0, 0);
+
+		inverted_vector.x = - vector.x;
+		inverted_vector.y = - vector.y;
+		inverted_vector.z = - vector.z;
+
+		return inverted_vector;
+	}
 }
 
 #endif

@@ -35,11 +35,11 @@ namespace utils
 										  z, z + w, z, z + h, z + w, z + h, z, z, z, z + h,
 										  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f });
 
-			case cube:				//   A      B		C		D	   E	  F       G		  H
-				return Matrix<T>(4, 8, { 10.0f, 110.0f, 110.0f, 10.0f, 10.0f, 110.0f, 110.0f, 10.0f,
-										 10.0f, 10.0f,  10.0f,  10.0f, 110.0f,110.0f, 110.0f, 110.0f,
-										 10.0f, 10.0f,  110.0f, 110.0f,10.0f, 10.0f,  110.0f, 110.0f,
-										 1.0f,  1.0f,   1.0f,   1.0f,  1.0f,  1.0f,   1.0f,   1.0f
+			case cube:				//   A      B		C		 D	   E	  F       G		  H
+				return Matrix<T>(4, 8, { 0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,   0.0f,
+										 0.0f,   0.0f,   0.0f,   0.0f, 100.0f, 100.0f, 100.0f, 100.0f,
+										 0.0f,   0.0f, 100.0f, 100.0f,   0.0f,   0.0f, 100.0f, 100.0f,
+										 1.0f,   1.0f,   1.0f,   1.0f,   1.0f,  1.0f,    1.0f,   1.0f
 					});
 
 							//return Matrix<T>(4, 24, { x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x + s, x - s, x - s, x + s, x - s, x - s, x - s, x - s, x + s, x + s, x + s, x + s,
