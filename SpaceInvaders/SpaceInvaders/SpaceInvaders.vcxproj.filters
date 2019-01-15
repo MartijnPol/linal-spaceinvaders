@@ -92,5 +92,8 @@
     <ClInclude Include="Line3D.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

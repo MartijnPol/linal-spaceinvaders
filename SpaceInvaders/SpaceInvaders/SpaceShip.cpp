@@ -11,6 +11,7 @@ namespace game
 	{
 		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::spaceship);
 		object_matrix_ = translate(object_matrix_, origin);
+		bullets_ = std::make_unique<std::vector<Bullet>>();
 	}
 
 	void SpaceShip::update()
@@ -67,6 +68,21 @@ namespace game
 
 		graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
 		graphics_.draw_matrix(object_matrix_, color_);
+
+		if (bullets_->size() >= 10)
+		{
+			bullets_->erase(bullets_->begin());
+		}
+		for (auto& bullet : *bullets_)
+		{
+			bullet.update();
+		}
+	}
+
+	void SpaceShip::fire_bullet()
+	{
+		const auto bullet = Bullet{ graphics_, graphics::colors::RED, origin_ };
+		bullets_->push_back(bullet);
 	}
 }
 
