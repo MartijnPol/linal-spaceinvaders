@@ -99,6 +99,16 @@ namespace math
 	template<class T> Vector2D<T> operator * (T s, const Vector2D<T>& v) { return { s*v.x, s*v.y }; };
 	template<class T> Vector2D<T> operator * (const Vector2D<T>& v, T s) { return { v.x*s, v.y*s }; };
 	template<class T> Vector2D<T> operator / (const Vector2D<T>& v, T s) { return { v.x / s, v.y / s }; };
+
+	template<class T>
+	bool operator==(const Vector2D<T>& left, const Vector2D<T>& right)
+	{
+		if (left.x != right.x || left.y != right.y) {
+			return false;
+		}
+
+		return true;
+	}
 }
 
 

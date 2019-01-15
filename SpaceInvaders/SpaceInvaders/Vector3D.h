@@ -74,8 +74,17 @@ namespace math
 			y /= vector_length;
 			z /= vector_length;
 		}
-
 	};
+
+	template<class T>
+	bool operator==(const Vector3D<T>& left, const Vector3D<T>& right)
+	{
+		if (left.x != right.x || left.y != right.y || left.z != right.z) {
+			return false;
+		}
+
+		return true;
+	}
 }
 
 #endif

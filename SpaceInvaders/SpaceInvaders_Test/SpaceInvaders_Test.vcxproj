@@ -152,7 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DegreesToRadiusTest.cpp" />
+    <ClInclude Include="MathTest.cpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -164,6 +164,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="MatrixTest.cpp" />
+    <ClCompile Include="Vector2DTest.cpp" />
+    <ClCompile Include="Vector3DTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpaceInvaders\SpaceInvaders.vcxproj">
