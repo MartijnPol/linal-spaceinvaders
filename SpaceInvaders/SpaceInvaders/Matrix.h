@@ -184,15 +184,15 @@ namespace math
 			{
 				if (row_index == 0)
 				{
-					result.x += left(row_index, column_index) * right.x;
+					result.x += left.at(row_index, column_index) * right.x;
 				}
 				else if (row_index == 1)
 				{
-					result.y += left(row_index, column_index) * right.y;
+					result.y += left.at(row_index, column_index) * right.y;
 				}
 				else if (row_index == 2)
 				{
-					result.z += left(row_index, column_index) * right.z;
+					result.z += left.at(row_index, column_index) * right.z;
 				}
 			}
 		}
