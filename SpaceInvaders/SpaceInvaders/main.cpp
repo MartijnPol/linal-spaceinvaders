@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-200.0f, -200.0f, 0.0f} };
 	auto target = game::Cube{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
-	auto speed = 10.0f;
+	auto speed = 1.0f;
 
 	SDL_Event event;
 	while (is_running)
@@ -46,44 +46,27 @@ int main(int argc, char * argv[])
 				switch (key)
 				{
 				case SDLK_w:
-					space_ship.increase_dive(speed);
+					space_ship.pitch_up = true;
 					break;
 
 				case SDLK_a:
-					space_ship.decrease_turn(speed);
+					space_ship.roll_left = true;
 					break;
 
 				case SDLK_s:
-					space_ship.decrease_dive(speed);
+					space_ship.pitch_down = true;
 					break;
 
 				case SDLK_d:
-					space_ship.increase_turn(speed);
+					space_ship.roll_right = true;
 					break;
 
 				case SDLK_q:
-					space_ship.decrease_roll(speed);
+					space_ship.yaw_left = true;
 					break;
 
 				case SDLK_e:
-					space_ship.increase_roll(speed);
-					break;
-
-				case SDLK_LSHIFT:
-					space_ship.increase_move(speed);
-					break;
-
-				case SDLK_RSHIFT:
-					space_ship.decrease_move(speed);
-					break;
-
-				case SDLK_1:
-					break;
-
-				case SDLK_2:
-					break;
-
-				case SDLK_3:
+					space_ship.yaw_right = true;
 					break;
 
 				case SDLK_h:

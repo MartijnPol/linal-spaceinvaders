@@ -27,7 +27,17 @@ namespace game
 
 		const auto middle_vector = original_matrix_.get_middle_vector();
 		const auto translated = result.translate(middle_vector);
-		handle(translated);
+		handle(translated, yaw_degrees);
+	}
+
+	void SpaceShip::reset()
+	{
+		pitch_up = false;
+		pitch_down = false;
+		yaw_left = false;
+		yaw_right = false;
+		roll_left = false;
+		roll_right = false;
 	}
 
 	void SpaceShip::roll()
@@ -44,9 +54,8 @@ namespace game
 
 		const auto middle_vector = original_matrix_.get_middle_vector();
 		const auto translated = result.translate(middle_vector);
-		handle(translated);
+		handle(translated, roll_degrees);
 	}
-
 
 	void SpaceShip::pitch()
 	{
@@ -62,27 +71,56 @@ namespace game
 
 		const auto middle_vector = original_matrix_.get_middle_vector();
 		const auto translated = result.translate(middle_vector);
-		handle(translated);
+		handle(translated, pitch_degrees);
 	}
 
-	void SpaceShip::handle(Line3D translated)
+	void SpaceShip::handle(const Line3D translated, const float degrees)
 	{
 		if (help_line_)
 		{
 			graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
 		}
 
-		rotate(translated);
+		rotate(translated, degrees);
 	}
 
 	void SpaceShip::update()
 	{
 		draw_matrix_ = original_matrix_;
-		degrees_ += 0.05f;
+
+		if (pitch_up)
+		{
+			pitch_degrees -= speed_;
+		}
+
+		if (pitch_down)
+		{
+			pitch_degrees += speed_;
+		}
+
+		if (yaw_left)
+		{
+			yaw_degrees += speed_;
+		}
+
+		if (yaw_right)
+		{
+			yaw_degrees -= speed_;
+		}
+
+		if (roll_left)
+		{
+			roll_degrees -= speed_;
+		}
+
+		if (roll_right)
+		{
+			roll_degrees += speed_;
+		}
 
 		pitch();
-		yaw();
 		roll();
+		yaw();
 
 		draw_matrix_ = translate(draw_matrix_, origin_);
 		graphics_.draw_matrix(draw_matrix_, color_);
@@ -95,6 +133,8 @@ namespace game
 		{
 			bullet.update();
 		}
+
+		reset();
 	}
 
 	void SpaceShip::fire_bullet()
