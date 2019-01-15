@@ -41,8 +41,9 @@ namespace game
 			speed_ += 1.0f;
 
 			const auto direction = Vector3D<float>{ speed_, 0.f, 0.f };
+			origin_ += direction;
 
-			draw_matrix_ = translate(draw_matrix_, direction);
+			draw_matrix_ = translate(draw_matrix_, origin_);
 
 			graphics_.draw_matrix(draw_matrix_, color_);
 		}
