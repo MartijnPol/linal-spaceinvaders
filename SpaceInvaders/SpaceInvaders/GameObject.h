@@ -19,12 +19,14 @@ namespace game
 		void rotate(Line3D line, float degrees)
 		{
 			draw_matrix_ = math::rotate(draw_matrix_, line, degrees);
+			heading_ = math::rotate(line, degrees) * heading_;
 		}
 
 	protected:
 		Matrix<T> original_matrix_;
 		Matrix<T> draw_matrix_;
 		Vector3D<T> origin_;
+		Vector3D<T> heading_{ 0.0f, 0.0f, 1.0f };
 
 		float degrees_{ 0.0f };
 		bool help_line_{};

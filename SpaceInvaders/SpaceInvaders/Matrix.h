@@ -173,6 +173,33 @@ namespace math
 
 		return result;
 	}
+
+	template<class T>
+	Vector3D<T> operator * (const Matrix<T>& left, const Vector3D<T> right)
+	{
+		Vector3D<T> result{};
+		for (auto row_index = 0; row_index < left.rows; row_index++)
+		{
+			for (auto column_index = 0; column_index < left.rows; column_index++)
+			{
+				if (row_index == 0)
+				{
+					result.x += left(row_index, column_index) * right.x;
+				}
+				else if (row_index == 1)
+				{
+					result.y += left(row_index, column_index) * right.y;
+				}
+				else if (row_index == 2)
+				{
+					result.z += left(row_index, column_index) * right.z;
+				}
+			}
+		}
+
+		return result;
+	}
+
 #pragma endregion
 
 #pragma region Rotations in 2D
@@ -327,6 +354,7 @@ namespace math
 		const auto m5 = rotate_y(-t1);
 
 		auto step_one = from_origin * matrix;
+
 		auto step_two = m1 * step_one;
 		auto step_three = m2 * step_two;
 		auto step_four = m3 * step_three;
@@ -336,6 +364,33 @@ namespace math
 		auto step_seven = to_origin * step_six;
 
 		return step_seven;
+	}
+
+	template<class T>
+	Matrix<T> rotate(Line3D line, T degrees)
+	{
+		const auto t1 = std::atan2(line.z(), line.x());
+		const auto t2 = std::acosf(std::sqrtf(pow(line.x(), 2) + pow(line.z(), 2)) / line.length());
+
+		const auto m1 = rotate_y(t1);
+		const auto m2 = rotate_z(t2);
+		const auto m3 = rotate_x(degrees);
+		const auto m4 = rotate_z(-t2);
+		const auto m5 = rotate_y(-t1);
+
+		auto step_one = m2 * m1;
+		auto step_two = m3 * step_one;
+		auto step_three = m4 * step_two;
+		auto step_four = m5 * step_three;
+
+		return step_four;
+		
+	}
+
+	template<class T>
+	Matrix<T> rotate(Vector3D<T> vector)
+	{
+		return rotate_z(vector.z) * rotate_y(vector.y) * rotate_x(vector.x);
 	}
 
 	template<class T>
