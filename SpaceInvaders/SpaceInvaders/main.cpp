@@ -20,8 +20,8 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width, height };
 
-	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-100.0f, -100.0f, 0.0f} };
-	auto target = game::Cube{ graphics, colors::WHITE, Vector3D<float>{-100.0f, -100.0f, 0.0f}, true };
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-200.0f, -200.0f, 0.0f} };
+	auto target = game::Cube{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
 	auto speed = 10.0f;
 

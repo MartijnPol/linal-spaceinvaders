@@ -21,6 +21,7 @@ namespace utils
 			switch (shape)
 			{
 			case spaceship:
+										// A    B	  C		 D	    E	  F      G	    H     I      J
 				return Matrix<T>(4, 10, { 0.0f, 0.0f, 50.0f, 30.0f, 0.0f, 30.0f, 50.0f, 0.0f, 50.0f, 30.0f,
 										  50.0f, 0.0f, 0.0f, 30.0f, 0.0f, 30.0f, 0.0f, 50.0f, 0.0f, 30.0f,
 										  0.0f, 50.0f, 0.0f, 30.0f, 50.0f, 30.0f, 0.0f, 0.0f, 0.0f, 30.0f,

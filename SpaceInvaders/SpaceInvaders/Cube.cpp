@@ -136,24 +136,34 @@ namespace game
 		const auto m4 = rotate_z(-t2);
 		const auto m5 = rotate_y(-t2);
 
-		 auto step_one = from_origin * draw_matrix_;
+		auto step_one = from_origin * draw_matrix_;
 		//graphics_.draw_matrix(step_one, graphics::colors::RED);
-		 auto step_two = m1 * step_one;
+		auto step_two = m1 * step_one;
 		// graphics_.draw_matrix(step_two, graphics::colors::BLUE);
 
-		 auto step_three = m2 * step_two;
+		auto step_three = m2 * step_two;
 		// graphics_.draw_matrix(step_three, graphics::colors::WHITE);
 
-		 auto step_four = m3 * step_three;
+		auto step_four = m3 * step_three;
 		// graphics_.draw_matrix(step_four, graphics::colors::GREEN);
 
-		 auto step_five = m4 * step_four;
+		auto step_five = m4 * step_four;
 		// graphics_.draw_matrix(step_five, graphics::colors::GRAY);
 
-		 auto step_six = m5 * step_five;
-		 //graphics_.draw_matrix(step_six, graphics::colors::WHITE);
+		auto step_six = m5 * step_five;
+		//graphics_.draw_matrix(step_six, graphics::colors::WHITE);
 
 		draw_matrix_ = to_origin * step_six;
+
+		if (is_target_)
+		{
+			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, 0.0f };
+
+			const auto from = from_origin * draw_matrix_;
+			const auto scale_matrix = scale(scale_vector);
+			const auto result = scale_matrix * from;
+			draw_matrix_ = to_origin * result;
+		}
 	}
 
 
@@ -161,23 +171,11 @@ namespace game
 	{
 		draw_matrix_ = original_matrix_;
 		degrees_ += 0.2f;
+
 		roll();
-		if (is_target_)
-		{
-			//pulse();
 
-			//auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, 0.0f };
-
-			//auto from = from_origin * step_seven;
-			//const auto scale_matrix = scale(scale_vector);
-			//auto result = scale_matrix * from;
-			//result = to_origin * result;
-			graphics_.draw_matrix(draw_matrix_, color_);
-		}
-		else
-		{
-			graphics_.draw_matrix(draw_matrix_, color_);
-		}
+		draw_matrix_ = translate(draw_matrix_, origin_);
+		graphics_.draw_matrix(draw_matrix_, color_);
 	}
 
 	void Cube::pulse()

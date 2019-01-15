@@ -4,6 +4,8 @@
 #include "GraphicsFacade.h"
 #include "GameObject.h"
 
+struct Line3D;
+
 namespace game
 {
 	class SpaceShip : public GameObject<float>
@@ -15,9 +17,12 @@ namespace game
 	private:
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
-		Vector3D<float> location_;
 		float degrees_{ 0.0f };
 
+		void roll();
+		void pitch();
+		void yaw();
+		void rotate(Line3D translated);
 	};
 }
 
