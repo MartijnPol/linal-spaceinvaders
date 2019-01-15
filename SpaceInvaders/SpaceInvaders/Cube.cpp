@@ -90,7 +90,6 @@ namespace game
 		}
 	}
 
-
 	void Cube::update()
 	{
 		draw_matrix_ = original_matrix_;
