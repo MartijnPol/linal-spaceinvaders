@@ -4,6 +4,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+using namespace math;
+
 TEST_CLASS(MatrixTest)
 {
 public:
@@ -39,11 +41,129 @@ public:
 														4, 5, 6,
 														0, 0, 0 });
 
-		const auto result = math::translate(first_matrix, 2.0f, 2.0f);
+		const auto result = translate(first_matrix, 2.0f, 2.0f);
 
 		const auto expected_result = math::Matrix<float>(3, 3, { 1, 2, 3,
 																 4, 5, 6,
 																 0, 0, 0 });
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_2d_rotate_test)
+	{
+
+		auto first_matrix = math::Matrix<float>(3, 3, { 1, 2, 3,
+														4, 5, 6,
+														0, 0, 0 });
+
+		const auto result = rotate(first_matrix, 2.0f);
+
+		const auto expected_result = math::Matrix<float>(3, 3, { 0.859792829f, 1.82428420f, 2.78877544f,
+																 4.03246307f, 5.06675291f, 6.10104370f,
+																 0, 0, 0 });
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_scale_test)
+	{
+
+		auto scale_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
+
+		const auto result = scale(scale_vector);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { 2, 0, 0, 0,
+																 0, 2, 0, 0,
+																 0, 0, 2, 0,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_scale_translate_test)
+	{
+		auto scale_matrix = math::Matrix<float>(4, 4, { 2, 2, 4, 4,
+														4, 6, 6, 6,
+														8, 4, 2, 4,
+														0, 0, 0, 1 });
+
+		auto scale_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
+
+		const auto result = scale(scale_matrix, scale_vector);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { 4, 4, 8, 8,
+																 8, 12, 12, 12,
+																 16, 8, 4, 8,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_translate_test)
+	{
+		auto scale_matrix = math::Matrix<float>(4, 4, { 2, 2, 4, 4,
+														4, 6, 6, 6,
+														8, 4, 2, 4,
+														0, 0, 0, 1 });
+
+		const auto translate_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
+
+		const auto result = translate(scale_matrix, translate_vector);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { 2, 2, 4, 6,
+																 4, 6, 6, 8,
+																 8, 4, 2, 6,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_rotate_x_test)
+	{
+		const auto result = rotate_x(2.0f);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { 1, 0, 0, 0,
+																 0, -0.416146845f, -0.909297407f, 0,
+																 0, 0.909297407f, -0.416146845f, 0,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_rotate_y_test)
+	{
+		const auto result = rotate_y(2.0f);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { -0.416146845f, 0, 0.909297407f, 0,
+																 0, 1, 0 , 0,
+																 -0.909297407f, 0, -0.416146845f, 0,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_rotate_z_test)
+	{
+		const auto result = rotate_z(2.0f);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { -0.416146845f, -0.909297407f, 0, 0,
+																 0.909297407f, -0.416146845f, 0 , 0,
+																 0, 0, 1, 0,
+																 0, 0, 0, 1 });
+
+		Assert::IsTrue(expected_result == result);
+	}
+
+	TEST_METHOD(matrix_3d_rotate_test)
+	{
+		const auto rotation_vector = Vector3D<float>{ 2.0f, 2.0f, 2.0f };
+
+		const auto result = rotate(rotation_vector);
+
+		const auto expected_result = math::Matrix<float>(4, 4, { 0.998782039f, -0.0336610042f, 0.0360749662f, 0,
+																 0.0348782353f, 0.998824537f, -0.0336610042f, 0,
+																 -0.0348994955f, 0.0348782353f, 0.998782039, 0,
+																 0, 0, 0, 1 });
+
 		Assert::IsTrue(expected_result == result);
 	}
 };
