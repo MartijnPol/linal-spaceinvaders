@@ -15,10 +15,10 @@ namespace game
 
 	void SpaceShip::update()
 	{
-		auto result = translate(object_matrix_, Vector3D<float>{ move(), 0.0f, 0.0f });
-		//const auto rotation_vector = Vector3D<float>{ dive(), turn(), roll() };
-		//const auto rotation_matrix = rotate(rotation_vector);
-		//auto result = rotation_matrix * object_matrix_;
+		const auto rotation_vector = Vector3D<float>{ dive(), turn(), roll() };
+		const auto rotation_matrix = rotate(rotation_vector);
+		auto result = rotation_matrix * object_matrix_;
+
 		graphics_.draw_matrix(result, color_);
 	}
 }

@@ -29,6 +29,11 @@ struct Line3D
 		return { {start.x + other.x, start.y + other.y, start.z + other.z},
 			{end.x + other.x, end.y + other.y, end.z + other.z } };
 	}
+
+	float length() const
+	{
+		return std::sqrt(std::pow(x(), 2) + std::pow(y(), 2) + std::pow(z(), 2));
+	}
 };
 
 #endif
