@@ -81,7 +81,7 @@ namespace game
 
 		if (is_target_)
 		{
-			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, 0.0f };
+			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, scale_factor_ };
 
 			const auto from = from_origin * draw_matrix_;
 			const auto scale_matrix = scale(scale_vector);

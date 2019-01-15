@@ -72,6 +72,18 @@ int main(int argc, char * argv[])
 					target.switch_help_line();
 					break;
 
+				case SDLK_1:
+					graphics.current_view(GraphicsFacade::front);
+					break;
+
+				case SDLK_2:
+					graphics.current_view(GraphicsFacade::top);
+					break;
+
+				case SDLK_3:
+					graphics.current_view(GraphicsFacade::side);
+					break;
+
 				case SDLK_LSHIFT:
 					space_ship.accelerate();
 					break;

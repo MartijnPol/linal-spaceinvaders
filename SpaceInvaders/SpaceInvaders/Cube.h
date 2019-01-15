@@ -14,7 +14,7 @@ namespace game
 		void update();
 
 	private:
-		graphics::GraphicsFacade graphics_;
+		graphics::GraphicsFacade& graphics_;
 		graphics::Color color_;
 
 		void roll();
