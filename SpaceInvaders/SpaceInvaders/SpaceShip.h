@@ -3,6 +3,7 @@
 
 #include "GraphicsFacade.h"
 #include "GameObject.h"
+#include "Bullet.h"
 
 struct Line3D;
 
@@ -13,8 +14,10 @@ namespace game
 	public:
 		explicit SpaceShip(graphics::GraphicsFacade& graphics_facade, graphics::Color color, Vector3D<float> origin);
 		void update();
+		void fire_bullet();
 
 	private:
+		std::unique_ptr<std::vector<Bullet>> bullets_;
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
 

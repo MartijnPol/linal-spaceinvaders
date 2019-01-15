@@ -90,6 +90,10 @@ int main(int argc, char * argv[])
 					target.switch_help_line();
 					break;
 
+				case SDLK_SPACE:
+					space_ship.fire_bullet();
+					break;
+
 				default:
 					break;
 				}
