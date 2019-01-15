@@ -20,10 +20,10 @@ int main(int argc, char * argv[])
 	auto timer = TimerFacade{};
 	auto graphics = GraphicsFacade{ width, height };
 
-	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{0.0f, 0.0f, 0.0f} };
-	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{30.0f, 50.0f, 0.0f}, true };
+	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-100.0f, -100.0f, 0.0f} };
+	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{0.0f, 0.0f, 0.0f}, true };
 
-	auto speed = 20.0f;
+	auto speed = 10.0f;
 
 	SDL_Event event;
 	while (is_running)
@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 		if (timer.delta_time() >= 1.0f / 60.0f)
 		{
 			graphics.clear();
-			//space_ship.update();
+			space_ship.update();
 			target.update();
 
 			SDL_PollEvent(&event);
@@ -70,11 +70,11 @@ int main(int argc, char * argv[])
 					break;
 
 				case SDLK_LSHIFT:
-					speed += 0.01f;
+					space_ship.increase_move(speed);
 					break;
 
 				case SDLK_RSHIFT:
-					speed -= 0.01f;
+					space_ship.decrease_move(speed);
 					break;
 
 				default:

@@ -23,8 +23,13 @@ namespace game
 		void decrease_dive(const float dive) noexcept { dive_value_ -= dive; }
 		float dive() const noexcept { return dive_value_; }
 
+		void increase_move(const float move) noexcept { move_value_ += move; }
+		void decrease_move(const float move) noexcept { move_value_ -= move; }
+		float move() const noexcept { return move_value_; }
+
 		void reset()
 		{
+			move_value_ = 0.0f;
 			dive_value_ = 0.0f;
 			roll_value_ = 0.0f;
 			turn_value_ = 0.0f;
@@ -36,6 +41,7 @@ namespace game
 		float turn_value_{};
 		float roll_value_{};
 		float dive_value_{};
+		float move_value_{};
 	};
 }
 

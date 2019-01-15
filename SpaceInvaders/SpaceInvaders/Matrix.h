@@ -30,12 +30,12 @@ namespace math
 			return inner[row * columns + column];
 		}
 
-		float min_x()
+		T min(const int row)
 		{
-			auto min = std::numeric_limits<float>::max();
+			auto min = std::numeric_limits<T>::max();
 			for (auto i = 0; i < columns; ++i)
 			{
-				const auto x = at(0, i);
+				const auto x = at(row, i);
 				if (x < min)
 				{
 					min = x;
@@ -45,72 +45,12 @@ namespace math
 			return min;
 		}
 
-		float max_x()
+		T max(int const row)
 		{
 			auto max = 0.0f;
 			for (auto i = 0; i < columns; ++i)
 			{
-				const auto x = at(0, i);
-				if (x > max)
-				{
-					max = x;
-				}
-			}
-
-			return max;
-		}
-
-		float min_y()
-		{
-			auto min = std::numeric_limits<float>::max();
-			for (auto i = 0; i < columns; ++i)
-			{
-				const auto x = at(1, i);
-				if (x < min)
-				{
-					min = x;
-				}
-			}
-
-			return min;
-		}
-
-		float max_y()
-		{
-			auto max = 0.0f;
-			for (auto i = 0; i < columns; ++i)
-			{
-				const auto x = at(1, i);
-				if (x > max)
-				{
-					max = x;
-				}
-			}
-
-			return max;
-		}
-
-		float min_z()
-		{
-			auto min = std::numeric_limits<float>::max();
-			for (auto i = 0; i < columns; ++i)
-			{
-				const auto x = at(2, i);
-				if (x < min)
-				{
-					min = x;
-				}
-			}
-
-			return min;
-		}
-
-		float max_z()
-		{
-			auto max = 0.0f;
-			for (auto i = 0; i < columns; ++i)
-			{
-				const auto x = at(2, i);
+				const auto x = at(row, i);
 				if (x > max)
 				{
 					max = x;
@@ -298,7 +238,7 @@ namespace math
 	}
 
 	template<class T>
-	Matrix<T> translate(Vector3D<T> &vector) {
+	Matrix<T> translate(Vector3D<T> vector) {
 		return Matrix<T>(4, 4, { 1, 0, 0, vector.x,
 								 0, 1, 0, vector.y,
 								 0, 0, 1, vector.z,
@@ -313,7 +253,7 @@ namespace math
 	}
 
 	template<class T>
-	Matrix<T> translate(Matrix<T> &matrix, Vector3D<T> &vector)
+	Matrix<T> translate(Matrix<T> &matrix, Vector3D<T> vector)
 	{
 		Matrix<T> translated_matrix = translate(vector);
 

@@ -37,7 +37,7 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_line(Vector2D<float>& start, Vector2D<float>& end, const Color color) const
+	void GraphicsFacade::draw_line(const Vector2D<float> start, const Vector2D<float> end, const Color color) const
 	{
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 
@@ -51,7 +51,7 @@ namespace graphics
 		SDL_RenderPresent(renderer_);
 	}
 
-	void GraphicsFacade::draw_line(Vector3D<float>& start, Vector3D<float>& end, const Color color) const
+	void GraphicsFacade::draw_line(Vector3D<float> start, Vector3D<float> end, const Color color) const
 	{
 		SDL_SetRenderDrawColor(renderer_, color.red, color.green, color.blue, 255);
 
@@ -83,6 +83,6 @@ namespace graphics
 		SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
 		SDL_RenderClear(renderer_);
 
-		//draw_axes();
+		draw_axes();
 	}
 }
