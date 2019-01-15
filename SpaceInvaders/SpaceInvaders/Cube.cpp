@@ -9,7 +9,7 @@ namespace game
 	Cube::Cube(graphics::GraphicsFacade & graphics_facade, const graphics::Color color, const Vector3D<float> origin, const bool is_target)
 		: GameObject<float>(origin), graphics_(graphics_facade), color_(color), is_target_(is_target)
 	{
-		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::cube, origin);
+		object_matrix_ = ShapeFactory::get_shape<float>(ShapeFactory::cube);
 		translate(object_matrix_, origin);
 	}
 
@@ -43,58 +43,40 @@ namespace game
 		const auto middle_vector = Vector3D<float>{ middle_point_x, middle_point_y, middle_point_z };
 		auto translated = result.translate(middle_vector);
 
-		graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
-
 		const auto t1 = Math::radius_to_degrees(std::atan2(translated.z(), translated.x()));
 		const auto t2 = Math::radius_to_degrees(std::acosf(std::sqrtf(pow(translated.x(), 2) + pow(translated.z(), 2)) / translated.length()));
 
 		const auto to_origin = translate(translated.start);
+		const auto from_origin = translate(Vector3D<float>{-translated.start});
 
 		const auto m1 = rotate_y(t1);
 		const auto m2 = rotate_z(t2);
 		const auto m3 = rotate_x(degrees_);
-		const auto m4 = rotate_z_negative(t2);
-		const auto m5 = rotate_y_negative(t2);
+		const auto m4 = rotate_z(-t2);
+		const auto m5 = rotate_y(-t2);
 
-		const auto from_origin = translate(Vector3D<float>{-translated.start.x, -translated.start.y, -translated.start.z});
+		const auto step_one = from_origin * object_matrix_;
+		const auto step_two = m1 * step_one;
+		const auto step_three = m2 * step_two;
+		const auto step_four = m3 * step_three;
+		const auto step_five = m4 * step_four;
+		const auto step_six = m5 * step_five;
+		auto step_seven = to_origin * step_six;
 
-		auto transform_matrix = from_origin * to_origin;
-
-		//graphics_.draw_matrix(object_matrix_, graphics::colors::RED);
-
-
-		auto tst1 = from_origin * object_matrix_;
-		//graphics_.draw_matrix(tst1, graphics::colors::GREEN);
-
-		auto tst2 = m1 * tst1;
-		//graphics_.draw_matrix(tst2, graphics::colors::GREEN);
-
-		auto tst3 = m2 * tst2;
-		//graphics_.draw_matrix(tst3, graphics::colors::GREEN);
-
-		auto tst4 = m3 * tst3;
-
-		auto tst5 = m4 * tst4;
-		//graphics_.draw_matrix(tst5, graphics::colors::RED);
-
-		auto tst6 = m5 * tst5;
-		//graphics_.draw_matrix(tst6, graphics::colors::GRAY);
-
-		auto tst7= to_origin * tst6;
-		//graphics_.draw_matrix(tst7, graphics::colors::GRAY);
-
-
-		//object_matrix_ = rotate(result, { 2.0f, 2.0f, 0.0f });
+		if (help_line_)
+		{
+			graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
+		}
 
 		if (is_target_)
 		{
 			pulse();
-			degrees_ += 0.10f;
+			degrees_ += 0.01f;
 
 			auto scale_vector = Vector3D<float>{ scale_factor_, scale_factor_, scale_factor_ };
 			const auto scale_matrix = scale(scale_vector);
-			auto result = scale_matrix * tst7;
-			graphics_.draw_matrix(result, color_);
+			auto result = scale_matrix * step_seven;
+			graphics_.draw_matrix(step_seven, color_);
 		}
 		else
 		{

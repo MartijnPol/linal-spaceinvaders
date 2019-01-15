@@ -76,6 +76,17 @@ namespace math
 		}
 	};
 
+	template <typename T>
+	Vector3D<T> operator -(const Vector3D<T> vector)
+	{
+		auto inverted_vector = Vector3D<T>(0, 0, 0);
+
+		inverted_vector.x = - vector.x;
+		inverted_vector.y = - vector.y;
+		inverted_vector.z = - vector.z;
+
+		return inverted_vector;
+	}
 	template<class T>
 	bool operator==(const Vector3D<T>& left, const Vector3D<T>& right)
 	{
