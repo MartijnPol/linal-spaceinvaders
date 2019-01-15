@@ -20,7 +20,6 @@ namespace game
 		std::unique_ptr<std::vector<Bullet>> bullets_;
 		graphics::GraphicsFacade graphics_;
 		graphics::Color color_;
-		float degrees_{ 0.0f };
 
 		void roll();
 		void pitch();

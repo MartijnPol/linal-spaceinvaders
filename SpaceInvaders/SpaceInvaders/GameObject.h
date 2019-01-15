@@ -44,6 +44,8 @@ namespace game
 		Matrix<T> original_matrix_;
 		Matrix<T> draw_matrix_;
 		Vector3D<T> origin_;
+
+		float degrees_{ 0.0f };
 		float turn_value_{};
 		float roll_value_{};
 		float dive_value_{};

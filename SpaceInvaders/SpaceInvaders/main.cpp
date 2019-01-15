@@ -87,6 +87,7 @@ int main(int argc, char * argv[])
 					break;
 
 				case SDLK_h:
+					space_ship.switch_help_line();
 					target.switch_help_line();
 					break;
 
