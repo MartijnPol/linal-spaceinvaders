@@ -164,8 +164,6 @@ namespace game
 
 		draw_matrix_ = translate(draw_matrix_, origin_);
 		graphics_.draw_matrix(draw_matrix_, color_);
-		graphics_.draw_line(translated.start, translated.end, graphics::colors::BLUE);
-		graphics_.draw_matrix(object_matrix_, color_);
 
 		if (bullets_->size() >= 10)
 		{
