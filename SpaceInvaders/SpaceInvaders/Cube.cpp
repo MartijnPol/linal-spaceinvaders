@@ -73,9 +73,6 @@ namespace game
 
 		rotate(translated, degrees_);
 
-		const auto t1 = std::atan2(translated.z(), translated.x());
-		const auto t2 = std::acosf(std::sqrtf(pow(translated.x(), 2) + pow(translated.z(), 2)) / translated.length());
-
 		const auto to_origin = translate(translated.start);
 		const auto from_origin = translate(Vector3D<float>{-translated.start});
 
