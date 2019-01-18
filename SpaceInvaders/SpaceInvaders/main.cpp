@@ -22,6 +22,7 @@ int main(int argc, char * argv[])
 
 	auto space_ship = game::SpaceShip{ graphics, colors::WHITE, Vector3D<float>{-200.0f, -200.0f, 0.0f} };
 	auto target = game::Cube{ graphics, colors::RED, Vector3D<float>{200.0f, 200.0f, 0.0f}, true };
+	auto second_target = game::Cube{ graphics, colors::GRAY, Vector3D<float>{0.0f, 0.0f, 0.0f}, false };
 
 	SDL_Event event;
 	while (is_running)
@@ -32,6 +33,7 @@ int main(int argc, char * argv[])
 			graphics.clear();
 			space_ship.update();
 			target.update();
+			second_target.update();
 
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT)

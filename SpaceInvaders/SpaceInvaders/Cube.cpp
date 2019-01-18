@@ -93,7 +93,6 @@ namespace game
 		degrees_ += 0.05f;
 
 		pitch();
-		roll();
 
 		if (is_target_)
 		{
